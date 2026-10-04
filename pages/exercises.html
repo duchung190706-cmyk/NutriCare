@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriCare – Khám phá các bài tập phù hợp với mục tiêu sức khỏe của bạn." data-i18n="exercises.metaDesc" />
+  <title data-i18n="exercises.metaTitle">NutriCare – Trung tâm bài tập</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet" href="../css/exercises.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+
+      <!-- Logo -->
+      <a href="../index.html" class="nav-logo" aria-label="NutriCare Home">
+        <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+        <span class="nav-logo-text">NutriCare</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="../index.html"           class="nav-link"        data-i18n="nav.home"></a>
+        <a href="dashboard.html"          class="nav-link"        data-i18n="nav.dashboard"></a>
+        <a href="calculator.html"         class="nav-link"        data-i18n="nav.calculator"></a>
+        <a href="foods.html"              class="nav-link"        data-i18n="nav.foods"></a>
+        <a href="meals.html"              class="nav-link"        data-i18n="nav.meals"></a>
+        <a href="guide.html"              class="nav-link"        data-i18n="nav.guide"></a>
+        <a href="exercises.html"          class="nav-link active" data-i18n="nav.exercises"></a>
+        <a href="grocery.html"           class="nav-link"        data-i18n="nav.grocery"></a>
+        <a href="order.html"       class="nav-link"        data-i18n="nav.order"></a>
+        <a href="meals.html"              class="nav-link nav-link-cta" data-i18n="nav.myMeals"></a>
+
+        <!-- ── Language Switcher ── -->
+        <div class="lang-switcher" role="group" aria-label="Chọn ngôn ngữ" id="langSwitcher">
+          <button class="lang-btn lang-btn-vi active" id="btnVI"
+                  data-lang="vi" aria-pressed="true"
+                  title="Tiếng Việt">
+            🇻🇳 VI
+          </button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn lang-btn-en" id="btnEN"
+                  data-lang="en" aria-pressed="false"
+                  title="English">
+            🇬🇧 EN
+          </button>
+        </div>
+      </nav>
+
+      <!-- Hamburger Button (Mobile) -->
+      <button class="hamburger" id="hamburger"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main>
+    <!-- HERO SECTION -->
+    <section class="exercises-hero">
+      <div class="container">
+        <span class="section-badge" data-i18n="exercises.heroBadge"></span>
+        <h1 class="hero-title" data-i18n="exercises.heroTitle"></h1>
+        <p class="hero-subtitle" data-i18n="exercises.heroSubtitle"></p>
+        <a href="#exercise-list" class="btn btn-primary" data-i18n="exercises.heroCta"></a>
+      </div>
+    </section>
+
+    <!-- CALORIE BURN CALCULATOR -->
+    <section class="section section-light">
+      <div class="container">
+        <div class="calculator-card">
+          <h2 class="section-title text-center" data-i18n="exercises.calcTitle"></h2>
+          <p class="section-subtitle text-center" data-i18n="exercises.calcSubtitle"></p>
+          
+          <div class="calculator-grid">
+            <div class="form-group">
+              <label for="calcWeight" data-i18n="exercises.calcWeight"></label>
+              <input type="number" id="calcWeight" class="form-control" min="1" max="300" placeholder="Nhập cân nặng..." data-i18n="exercises.calcWeightPh" />
+            </div>
+            <div class="form-group">
+              <label for="calcExercise" data-i18n="exercises.calcExercise"></label>
+              <select id="calcExercise" class="form-control">
+                <option value="" disabled selected data-i18n="exercises.calcSelectEx"></option>
+                <!-- Filled dynamically via JS -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="calcDuration" data-i18n="exercises.calcDuration"></label>
+              <input type="number" id="calcDuration" class="form-control" min="1" max="600" placeholder="Nhập số phút..." data-i18n="exercises.calcDurationPh" />
+            </div>
+          </div>
+          
+          <div class="text-center mt-md">
+            <button id="btnCalculateBurn" class="btn btn-primary" data-i18n="exercises.calcBtn"></button>
+          </div>
+          
+          <div id="calcResultContainer" class="calc-result-container hidden">
+            <p class="calc-result-label" data-i18n="exercises.calcResult"></p>
+            <h3 id="calcResultValue" class="calc-result-value">-- kcal</h3>
+            <p class="calc-disclaimer" data-i18n="exercises.calcDisclaimer"></p>
+          </div>
+          <div id="calcError" class="calc-error hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GOAL-BASED RECOMMENDATIONS -->
+    <section class="section">
+      <div class="container text-center">
+        <h2 class="section-title" data-i18n="exercises.recTitle"></h2>
+        <p class="section-subtitle" data-i18n="exercises.recSubtitle"></p>
+        
+        <div class="goal-buttons">
+          <button class="btn-goal" data-goal="lose-weight" data-i18n="exercises.recLoseWeight"></button>
+          <button class="btn-goal" data-goal="build-muscle" data-i18n="exercises.recBuildMuscle"></button>
+          <button class="btn-goal" data-goal="improve-fitness" data-i18n="exercises.recFitness"></button>
+          <button class="btn-goal" data-goal="stay-active" data-i18n="exercises.recActive"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE CATALOG (FILTERS & LIST) -->
+    <section id="exercise-list" class="section section-light">
+      <div class="container">
+        
+        <h2 class="section-title text-center" data-i18n="exercises.filterTitle"></h2>
+        
+        <div class="filter-bar">
+          <div class="filter-group">
+            <input type="text" id="searchExercise" class="form-control" placeholder="Tìm kiếm bài tập..." data-i18n="exercises.searchPlaceholder" />
+          </div>
+          <div class="filter-group">
+            <select id="filterCategory" class="form-control">
+              <option value="all" data-i18n="exercises.filterAll"></option>
+              <option value="Cardio" data-i18n="exercises.filterCardio"></option>
+              <option value="Strength" data-i18n="exercises.filterStrength"></option>
+              <option value="Flexibility" data-i18n="exercises.filterFlexibility"></option>
+              <option value="Full Body" data-i18n="exercises.filterFullBody"></option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select id="filterDifficulty" class="form-control">
+              <option value="all" data-i18n="exercises.filterAll"></option>
+              <option value="Beginner" data-i18n="exercises.filterBeginner"></option>
+              <option value="Intermediate" data-i18n="exercises.filterIntermediate"></option>
+              <option value="Advanced" data-i18n="exercises.filterAdvanced"></option>
+            </select>
+          </div>
+        </div>
+
+        <div id="exerciseGrid" class="exercise-grid">
+          <!-- Rendered by JS -->
+        </div>
+        
+        <div id="noResults" class="hidden text-center mt-md">
+          <p class="text-secondary" data-i18n="exercises.noResults"></p>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- WEEKLY EXERCISE PLAN -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title text-center" data-i18n="exercises.planTitle"></h2>
+        <p class="section-subtitle text-center" data-i18n="exercises.planSubtitle"></p>
+        
+        <div class="plan-header text-right">
+          <button id="btnResetPlan" class="btn btn-outline btn-sm" data-i18n="exercises.planReset"></button>
+        </div>
+        
+        <div class="weekly-plan-grid" id="weeklyPlanGrid">
+          <!-- Rendered by JS -->
+        </div>
+        
+        <div class="text-center mt-md">
+           <button id="btnSavePlan" class="btn btn-primary" data-i18n="exercises.planSaveBtn"></button>
+           <div id="planSaveMsg" class="plan-msg hidden" data-i18n="exercises.planSaved"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NUTRITION CONNECTION -->
+    <section class="section cta-section">
+      <div class="container text-center">
+        <h2 class="section-title text-white" data-i18n="exercises.nutTitle"></h2>
+        <p class="section-subtitle text-white opacity-80 mx-auto" data-i18n="exercises.nutSubtitle"></p>
+        <a href="calculator.html" class="btn btn-secondary mt-sm" data-i18n="exercises.nutBtn"></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       EXERCISE DETAIL MODAL
+  ============================================================ -->
+  <div id="exerciseModal" class="modal" aria-hidden="true">
+    <div class="modal-overlay" tabindex="-1" data-close-modal></div>
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close modal" data-close-modal>&times;</button>
+      
+      <div class="modal-header">
+        <span class="modal-emoji" id="modalEmoji"></span>
+        <h3 class="modal-title" id="modalTitle"></h3>
+        <div class="modal-badges">
+          <span class="badge badge-category" id="modalCategory"></span>
+          <span class="badge badge-difficulty" id="modalDifficulty"></span>
+        </div>
+      </div>
+      
+      <div class="modal-body">
+        <p class="modal-desc" id="modalDesc"></p>
+        
+        <div class="modal-grid">
+          <div class="modal-info-item">
+            <strong data-i18n="exercises.modalMuscles"></strong>
+            <span id="modalMuscles"></span>
+          </div>
+          <div class="modal-info-item">
+            <strong data-i18n="exercises.modalEquipment"></strong>
+            <span id="modalEquipment"></span>
+          </div>
+          <div class="modal-info-item">
+            <strong data-i18n="exercises.modalDuration"></strong>
+            <span id="modalDuration"></span>
+          </div>
+          <div class="modal-info-item">
+            <strong data-i18n="exercises.modalCalBurn"></strong>
+            <span id="modalCalBurn"></span>
+          </div>
+        </div>
+        
+        <div class="modal-instructions">
+          <h4 data-i18n="exercises.modalHow"></h4>
+          <ol id="modalSteps"></ol>
+        </div>
+        
+        <div class="modal-safety">
+          <p data-i18n="exercises.modalSafety"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-container">
+      
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo footer-logo">
+          <span class="nav-logo-icon">🥗</span>
+          <span class="nav-logo-text">NutriCare</span>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc"></p>
+      </div>
+
+      <!-- Nav Links -->
+      <div class="footer-nav">
+        <h4 class="footer-nav-title" data-i18n="footer.navTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="../index.html" class="footer-link" data-i18n="footer.linkHome"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalculator"></a></li>
+          <li><a href="foods.html" class="footer-link" data-i18n="footer.linkFoods"></a></li>
+          <li><a href="meals.html" class="footer-link" data-i18n="footer.linkMeals"></a></li>
+        </ul>
+      </div>
+
+      <!-- Tools -->
+      <div class="footer-tools">
+        <h4 class="footer-nav-title" data-i18n="footer.toolsTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkBmi"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalorie"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkPlanner"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy" data-i18n="footer.copy"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../data/translations.js"></script>
+  <script src="../data/exercises.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/exercises.js"></script>
+</body>
+</html>
+
+

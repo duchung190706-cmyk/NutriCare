@@ -1,0 +1,351 @@
+/* ============================================================
+   NutriCare – responsive.css
+   Responsive breakpoints for the Home Page
+   Breakpoints:
+     - Large desktop: > 1200px
+     - Desktop:       1024px – 1200px
+     - Tablet:        768px  – 1023px
+     - Mobile:        < 768px
+     - Small mobile:  < 480px
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   LARGE DESKTOP (> 1200px) — minor tweaks only
+------------------------------------------------------------ */
+@media (min-width: 1200px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+}
+
+/* ------------------------------------------------------------
+   TABLET (768px – 1023px)
+------------------------------------------------------------ */
+@media (max-width: 1023px) {
+
+  /* Navigation */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Language switcher – sit below nav links in mobile menu */
+  .lang-switcher {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    align-self: center;
+    justify-content: center;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 0.25rem;
+    border-bottom: 1px solid rgba(209, 213, 219, 0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-110%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .nav-link-cta {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+
+  /* Hero */
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    order: 1;
+  }
+
+  .hero-visual {
+    order: 2;
+    justify-content: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-trust {
+    justify-content: center;
+  }
+
+  .hero-badge {
+    align-self: center;
+    margin: 0 auto var(--space-md);
+    display: inline-flex;
+  }
+
+  .hero-card {
+    max-width: 400px;
+  }
+
+  .float-badge-top {
+    top: -10px;
+    right: 0;
+  }
+
+  .float-badge-bottom {
+    bottom: -10px;
+    left: 0;
+  }
+
+  /* Benefits */
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Steps */
+  .steps-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  /* Cook or Order */
+  .cook-order-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Featured Meal */
+  .meal-card {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+
+  .meal-visual {
+    min-height: 200px;
+  }
+
+  /* Footer */
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ------------------------------------------------------------
+   MOBILE (< 768px)
+------------------------------------------------------------ */
+@media (max-width: 767px) {
+
+  /* Global spacing reduction */
+  :root {
+    --space-2xl: 4rem;
+    --space-xl:  2.5rem;
+  }
+
+  /* Section headers */
+  .section-title {
+    font-size: 1.625rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9375rem;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 3rem 0 4rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .hero-trust {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .hero-card {
+    max-width: 340px;
+  }
+
+  /* Benefits - single column */
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Steps */
+  .steps-container {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .step-item {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  .step-number {
+    position: absolute;
+    left: 20px;
+    top: -6px;
+    margin-bottom: 0;
+  }
+
+  .step-icon {
+    margin-bottom: 0;
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  /* Cook or Order */
+  .cook-card {
+    padding: var(--space-lg);
+  }
+
+  /* Meal card */
+  .meal-card {
+    max-width: 100%;
+  }
+
+  .meal-macros {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1rem;
+  }
+
+  /* CTA */
+  .cta-card {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .cta-card .btn-primary {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  /* Footer */
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer-brand {
+    grid-column: 1;
+  }
+}
+
+/* ------------------------------------------------------------
+   SMALL MOBILE (< 480px)
+------------------------------------------------------------ */
+@media (max-width: 479px) {
+
+  .hero-title {
+    font-size: 2.125rem;
+  }
+
+  .hero-card {
+    max-width: 100%;
+    border-radius: 1rem;
+  }
+
+  .float-badge {
+    display: none; /* hide floating badges on tiny screens */
+  }
+
+  .benefits-grid {
+    max-width: 100%;
+  }
+
+  .benefit-card {
+    padding: 1.25rem;
+  }
+
+  .meal-info {
+    padding: 1.25rem;
+  }
+
+  .meal-name {
+    font-size: 1.1875rem;
+  }
+
+  .meal-macros {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ------------------------------------------------------------
+   PRINT STYLES
+------------------------------------------------------------ */
+@media print {
+  .navbar,
+  .hero-visual,
+  .float-badge,
+  .hamburger,
+  .footer {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}

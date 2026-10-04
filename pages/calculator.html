@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriCare – Tinh toan dinh duong ca nhan." data-i18n="calculator.metaDesc" />
+  <title data-i18n="calculator.metaTitle">NutriCare – Tinh toan dinh duong</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet" href="../css/calculator.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+
+      <!-- Logo -->
+      <a href="../index.html" class="nav-logo" aria-label="NutriCare Home">
+        <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+        <span class="nav-logo-text">NutriCare</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="../index.html"   class="nav-link"        data-i18n="nav.home"></a>
+        <a href="dashboard.html" class="nav-link"        data-i18n="nav.dashboard"></a>
+        <a href="calculator.html" class="nav-link active" data-i18n="nav.calculator"></a>
+        <a href="foods.html"     class="nav-link"        data-i18n="nav.foods"></a>
+        <a href="meals.html"     class="nav-link"        data-i18n="nav.meals"></a>
+        <a href="guide.html"     class="nav-link"        data-i18n="nav.guide"></a>
+        <a href="exercises.html" class="nav-link"        data-i18n="nav.exercises"></a>
+        <a href="grocery.html"     class="nav-link"        data-i18n="nav.grocery"></a>
+        <a href="order.html"       class="nav-link"        data-i18n="nav.order"></a>
+        <a href="meals.html"     class="nav-link nav-link-cta" data-i18n="nav.myMeals"></a>
+
+        <!-- Language Switcher -->
+        <div class="lang-switcher" role="group" aria-label="Chon ngon ngu" id="langSwitcher">
+          <button class="lang-btn lang-btn-vi active" id="btnVI"
+                  data-lang="vi" aria-pressed="true" title="Tieng Viet">
+            🇻🇳 VI
+          </button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn lang-btn-en" id="btnEN"
+                  data-lang="en" aria-pressed="false" title="English">
+            🇬🇧 EN
+          </button>
+        </div>
+      </nav>
+
+      <!-- Hamburger Button (Mobile) -->
+      <button class="hamburger" id="hamburger"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <section class="calc-hero" id="calc-hero">
+      <div class="container">
+        <span class="calc-hero-badge" data-i18n="calculator.heroBadge"></span>
+        <h1 class="calc-hero-title" data-i18n="calculator.heroTitle"></h1>
+        <p class="calc-hero-subtitle" data-i18n="calculator.heroSubtitle"></p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MAIN CALCULATOR LAYOUT
+    ============================================================ -->
+    <section class="container">
+      <div class="calc-layout">
+
+        <!-- ── LEFT: FORM PANEL ── -->
+        <div class="calc-panel" id="calcFormPanel">
+          <h2 class="calc-panel-title">
+            <span class="panel-icon" aria-hidden="true">📝</span>
+            <span data-i18n="calculator.formTitle"></span>
+          </h2>
+          <p class="calc-panel-subtitle" data-i18n="calculator.formSubtitle"></p>
+
+          <form id="calcForm" novalidate>
+            <div class="form-grid">
+
+              <!-- GENDER (full width) -->
+              <div class="form-group full-width">
+                <label class="form-label" data-i18n="calculator.labelGender"></label>
+                <div class="gender-group" role="radiogroup" aria-labelledby="genderLabel">
+                  <div class="gender-option">
+                    <input type="radio" id="genderMale" name="gender" value="male" />
+                    <label class="gender-label" for="genderMale" data-i18n="calculator.genderMale"></label>
+                  </div>
+                  <div class="gender-option">
+                    <input type="radio" id="genderFemale" name="gender" value="female" />
+                    <label class="gender-label" for="genderFemale" data-i18n="calculator.genderFemale"></label>
+                  </div>
+                </div>
+                <span class="field-error" id="errGender" role="alert" data-i18n="calculator.errGender"></span>
+              </div>
+
+              <!-- AGE -->
+              <div class="form-group">
+                <label class="form-label" for="inputAge">
+                  <span data-i18n="calculator.labelAge"></span>
+                  <span class="label-unit" data-i18n="calculator.unitYears"></span>
+                </label>
+                <input type="number" id="inputAge" class="form-control"
+                       min="10" max="100" step="1"
+                       data-i18n-ph="calculator.phAge" />
+                <span class="field-error" id="errAge" role="alert" data-i18n="calculator.errAge"></span>
+              </div>
+
+              <!-- HEIGHT -->
+              <div class="form-group">
+                <label class="form-label" for="inputHeight">
+                  <span data-i18n="calculator.labelHeight"></span>
+                  <span class="label-unit" data-i18n="calculator.unitCm"></span>
+                </label>
+                <input type="number" id="inputHeight" class="form-control"
+                       min="50" max="250" step="0.5"
+                       data-i18n-ph="calculator.phHeight" />
+                <span class="field-error" id="errHeight" role="alert" data-i18n="calculator.errHeight"></span>
+              </div>
+
+              <!-- WEIGHT -->
+              <div class="form-group">
+                <label class="form-label" for="inputWeight">
+                  <span data-i18n="calculator.labelWeight"></span>
+                  <span class="label-unit" data-i18n="calculator.unitKg"></span>
+                </label>
+                <input type="number" id="inputWeight" class="form-control"
+                       min="20" max="300" step="0.1"
+                       data-i18n-ph="calculator.phWeight" />
+                <span class="field-error" id="errWeight" role="alert" data-i18n="calculator.errWeight"></span>
+              </div>
+
+              <!-- ACTIVITY (full width) -->
+              <div class="form-group full-width">
+                <label class="form-label" for="selectActivity" data-i18n="calculator.labelActivity"></label>
+                <select id="selectActivity" class="form-control">
+                  <option value="" disabled selected data-i18n="calculator.actSelect"></option>
+                  <option value="1.2"   data-i18n="calculator.actSedentary"></option>
+                  <option value="1.375" data-i18n="calculator.actLight"></option>
+                  <option value="1.55"  data-i18n="calculator.actModerate"></option>
+                  <option value="1.725" data-i18n="calculator.actVery"></option>
+                  <option value="1.9"   data-i18n="calculator.actExtreme"></option>
+                </select>
+                <span class="field-error" id="errActivity" role="alert" data-i18n="calculator.errActivity"></span>
+              </div>
+
+              <!-- GOAL (full width) -->
+              <div class="form-group full-width">
+                <label class="form-label" for="selectGoal" data-i18n="calculator.labelGoal"></label>
+                <select id="selectGoal" class="form-control">
+                  <option value="" disabled selected data-i18n="calculator.goalSelect"></option>
+                  <option value="lose"     data-i18n="calculator.goalLose"></option>
+                  <option value="maintain" data-i18n="calculator.goalMaintain"></option>
+                  <option value="gain"     data-i18n="calculator.goalGain"></option>
+                </select>
+                <span class="field-error" id="errGoal" role="alert" data-i18n="calculator.errGoal"></span>
+              </div>
+
+            </div><!-- /.form-grid -->
+
+            <div class="calc-submit-area">
+              <button type="submit" id="btnCalculate" class="btn btn-primary btn-calculate"
+                      data-i18n="calculator.calcBtn"></button>
+              <p class="calc-disclaimer" data-i18n="calculator.disclaimer"></p>
+            </div>
+
+          </form>
+        </div><!-- /.calc-panel -->
+
+        <!-- ── RIGHT: RESULTS PANEL ── -->
+        <div class="results-panel" id="resultsPanel" aria-live="polite">
+
+          <!-- Empty state (shown until first calculation) -->
+          <div class="results-empty" id="resultsEmpty">
+            <span class="results-empty-icon" aria-hidden="true">📊</span>
+            <p class="results-empty-text" data-i18n="calculator.emptyText"></p>
+          </div>
+
+          <!-- Results (hidden until calculated) -->
+          <div class="results-loaded" id="resultsLoaded">
+
+            <!-- BMI CARD -->
+            <div class="bmi-card">
+              <div class="bmi-card-header">
+                <h3 class="bmi-card-title">
+                  <span aria-hidden="true">⚖️</span>
+                  <span data-i18n="calculator.bmiTitle"></span>
+                </h3>
+              </div>
+              <div class="bmi-value-row">
+                <span class="bmi-number" id="resultBmiValue">--</span>
+                <span class="bmi-category-badge" id="resultBmiCategory"></span>
+              </div>
+              <div class="bmi-scale" role="presentation" aria-hidden="true">
+                <div class="bmi-scale-marker" id="bmiMarker" style="left: 0%"></div>
+              </div>
+              <div class="bmi-scale-labels" aria-hidden="true">
+                <span class="bmi-scale-label" data-i18n="calculator.bmiScaleUnder"></span>
+                <span class="bmi-scale-label" data-i18n="calculator.bmiScaleNormal"></span>
+                <span class="bmi-scale-label" data-i18n="calculator.bmiScaleOver"></span>
+                <span class="bmi-scale-label" data-i18n="calculator.bmiScaleObese"></span>
+              </div>
+            </div>
+
+            <!-- BMR / TDEE / TARGET STAT CARDS -->
+            <div class="stats-row">
+              <div class="stat-card">
+                <span class="stat-icon" aria-hidden="true">🔋</span>
+                <div class="stat-value" id="resultBmr">--</div>
+                <span class="stat-unit">kcal</span>
+                <div class="stat-label" data-i18n="calculator.statBmrLabel"></div>
+              </div>
+              <div class="stat-card">
+                <span class="stat-icon" aria-hidden="true">🔥</span>
+                <div class="stat-value" id="resultTdee">--</div>
+                <span class="stat-unit">kcal</span>
+                <div class="stat-label" data-i18n="calculator.statTdeeLabel"></div>
+              </div>
+              <div class="stat-card">
+                <span class="stat-icon" aria-hidden="true">🎯</span>
+                <div class="stat-value" id="resultCalTarget">--</div>
+                <span class="stat-unit">kcal</span>
+                <div class="stat-label" data-i18n="calculator.statCalLabel"></div>
+              </div>
+            </div>
+
+            <!-- CALORIE TARGET CARD -->
+            <div class="calorie-target-card">
+              <div class="calorie-target-header">
+                <p class="calorie-target-title" data-i18n="calculator.calTargetTitle"></p>
+              </div>
+              <div class="calorie-target-main">
+                <span class="calorie-target-number" id="resultCalTargetBig">--</span>
+                <span class="calorie-target-unit">kcal</span>
+              </div>
+              <p class="calorie-target-goal">
+                <span data-i18n="calculator.calTargetTitle"></span>&nbsp;·&nbsp;<span id="resultGoalLabel"></span>
+              </p>
+              <div class="calorie-adjustments">
+                <div class="calorie-adj-item">
+                  <div class="calorie-adj-label" data-i18n="calculator.calAdjMin"></div>
+                  <div class="calorie-adj-value" id="resultCalMin">--</div>
+                </div>
+                <div class="calorie-adj-item">
+                  <div class="calorie-adj-label" data-i18n="calculator.calAdjMax"></div>
+                  <div class="calorie-adj-value" id="resultCalMax">--</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MACROS CARD -->
+            <div class="macros-card">
+              <h3 class="macros-title" data-i18n="calculator.macrosTitle"></h3>
+              <p class="macros-subtitle" data-i18n="calculator.macrosSubtitle"></p>
+              <div class="macro-rows">
+
+                <!-- Protein -->
+                <div class="macro-row-item">
+                  <div class="macro-row-header">
+                    <div class="macro-row-left">
+                      <span class="macro-dot macro-dot-protein" aria-hidden="true"></span>
+                      <span class="macro-row-name" data-i18n="calculator.macroProtein"></span>
+                    </div>
+                    <div class="macro-row-right">
+                      <div class="macro-row-grams"><span id="resultProteinG">--</span>g</div>
+                      <div class="macro-row-detail"><span id="resultProteinKcal">--</span> kcal · <span id="resultProteinPct">--</span>%</div>
+                    </div>
+                  </div>
+                  <div class="macro-bar-bg" role="presentation" aria-hidden="true">
+                    <div class="macro-bar-fill macro-fill-protein" id="barProtein" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <!-- Carbs -->
+                <div class="macro-row-item">
+                  <div class="macro-row-header">
+                    <div class="macro-row-left">
+                      <span class="macro-dot macro-dot-carbs" aria-hidden="true"></span>
+                      <span class="macro-row-name" data-i18n="calculator.macroCarbs"></span>
+                    </div>
+                    <div class="macro-row-right">
+                      <div class="macro-row-grams"><span id="resultCarbsG">--</span>g</div>
+                      <div class="macro-row-detail"><span id="resultCarbsKcal">--</span> kcal · <span id="resultCarbsPct">--</span>%</div>
+                    </div>
+                  </div>
+                  <div class="macro-bar-bg" role="presentation" aria-hidden="true">
+                    <div class="macro-bar-fill macro-fill-carbs" id="barCarbs" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <!-- Fat -->
+                <div class="macro-row-item">
+                  <div class="macro-row-header">
+                    <div class="macro-row-left">
+                      <span class="macro-dot macro-dot-fat" aria-hidden="true"></span>
+                      <span class="macro-row-name" data-i18n="calculator.macroFat"></span>
+                    </div>
+                    <div class="macro-row-right">
+                      <div class="macro-row-grams"><span id="resultFatG">--</span>g</div>
+                      <div class="macro-row-detail"><span id="resultFatKcal">--</span> kcal · <span id="resultFatPct">--</span>%</div>
+                    </div>
+                  </div>
+                  <div class="macro-bar-bg" role="presentation" aria-hidden="true">
+                    <div class="macro-bar-fill macro-fill-fat" id="barFat" style="width: 0%"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- SAVED NOTICE -->
+            <div class="saved-notice" id="savedNotice">
+              <span class="saved-notice-icon" aria-hidden="true">✅</span>
+              <span data-i18n="calculator.savedNotice"></span>
+            </div>
+
+          </div><!-- /.results-loaded -->
+
+        </div><!-- /.results-panel -->
+
+      </div><!-- /.calc-layout -->
+    </section>
+
+    <!-- ============================================================
+         INFO / EXPLAINER SECTION
+    ============================================================ -->
+    <section class="calc-info-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="calculator.infoTitle"></h2>
+          <p class="section-subtitle" data-i18n="calculator.infoSubtitle"></p>
+        </div>
+        <div class="info-cards-grid">
+          <div class="info-card">
+            <span class="info-card-icon" aria-hidden="true">⚖️</span>
+            <h3 class="info-card-title" data-i18n="calculator.infoBmiTitle"></h3>
+            <p class="info-card-text" data-i18n="calculator.infoBmiText"></p>
+          </div>
+          <div class="info-card">
+            <span class="info-card-icon" aria-hidden="true">🔋</span>
+            <h3 class="info-card-title" data-i18n="calculator.infoBmrTitle"></h3>
+            <p class="info-card-text" data-i18n="calculator.infoBmrText"></p>
+          </div>
+          <div class="info-card">
+            <span class="info-card-icon" aria-hidden="true">🔥</span>
+            <h3 class="info-card-title" data-i18n="calculator.infoTdeeTitle"></h3>
+            <p class="info-card-text" data-i18n="calculator.infoTdeeText"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-container">
+
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo footer-logo" aria-label="NutriCare Home">
+          <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+          <span class="nav-logo-text">NutriCare</span>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc"></p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-nav-title" data-i18n="footer.navTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="../index.html"   class="footer-link" data-i18n="footer.linkHome"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalculator"></a></li>
+          <li><a href="foods.html"      class="footer-link" data-i18n="footer.linkFoods"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkMeals"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-tools">
+        <h4 class="footer-nav-title" data-i18n="footer.toolsTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkBmi"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalorie"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkPlanner"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy" data-i18n="footer.copy"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: translations MUST load before main.js -->
+  <script src="../data/translations.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/calculator.js"></script>
+</body>
+</html>
+
+

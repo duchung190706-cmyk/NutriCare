@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriCare – Theo dõi dinh dưỡng, lượng nước, vận động và tiến độ của bạn tại một nơi." data-i18n="dashboard.metaDesc" />
+  <title data-i18n="dashboard.metaTitle">NutriCare – Tổng quan sức khỏe</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+
+      <!-- Logo -->
+      <a href="../index.html" class="nav-logo" aria-label="NutriCare Home">
+        <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+        <span class="nav-logo-text">NutriCare</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="../index.html"           class="nav-link"        data-i18n="nav.home"></a>
+        <a href="dashboard.html"          class="nav-link active" data-i18n="nav.dashboard"></a>
+        <a href="calculator.html"         class="nav-link"        data-i18n="nav.calculator"></a>
+        <a href="foods.html"              class="nav-link"        data-i18n="nav.foods"></a>
+        <a href="meals.html"              class="nav-link"        data-i18n="nav.meals"></a>
+        <a href="guide.html"              class="nav-link"        data-i18n="nav.guide"></a>
+        <a href="exercises.html"          class="nav-link"        data-i18n="nav.exercises"></a>
+        <a href="grocery.html"     class="nav-link"        data-i18n="nav.grocery"></a>
+        <a href="order.html"       class="nav-link"        data-i18n="nav.order"></a>
+        <a href="meals.html"              class="nav-link nav-link-cta" data-i18n="nav.myMeals"></a>
+
+        <!-- ── Language Switcher ── -->
+        <div class="lang-switcher" role="group" aria-label="Chọn ngôn ngữ" id="langSwitcher">
+          <button class="lang-btn lang-btn-vi active" id="btnVI"
+                  data-lang="vi" aria-pressed="true"
+                  title="Tiếng Việt">
+            🇻🇳 VI
+          </button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn lang-btn-en" id="btnEN"
+                  data-lang="en" aria-pressed="false"
+                  title="English">
+            🇬🇧 EN
+          </button>
+        </div>
+      </nav>
+
+      <!-- Hamburger Button (Mobile) -->
+      <button class="hamburger" id="hamburger"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main>
+    
+    <!-- DASHBOARD HERO -->
+    <section class="dashboard-hero text-center">
+      <div class="container">
+        <h1 class="dashboard-hero-title" data-i18n="dashboard.heroTitle"></h1>
+        <p class="dashboard-hero-subtitle" data-i18n="dashboard.heroSubtitle"></p>
+        <div class="dashboard-date" id="dashboardDate"></div>
+      </div>
+    </section>
+
+    <div class="container">
+      
+      <!-- DAILY SUMMARY CARDS -->
+      <div class="summary-cards">
+        <!-- Calories -->
+        <div class="summary-card circular-card">
+          <div class="circular-progress-container">
+            <svg viewBox="0 0 100 100" class="circular-chart">
+              <circle class="circle-bg" cx="50" cy="50" r="40" />
+              <circle class="circle-path stroke-calories" id="sumCalRing" cx="50" cy="50" r="40" stroke-dasharray="0, 251.2" />
+            </svg>
+            <div class="circular-content">
+              <div class="circular-icon">🔥</div>
+              <div class="circular-percent" id="sumCalPercent">0%</div>
+            </div>
+          </div>
+          <div class="summary-info">
+            <div class="summary-label" data-i18n="dashboard.summaryCalories"></div>
+            <div class="summary-value"><span id="sumCalVal">0</span> / <span id="sumCalTarget">2000</span> kcal</div>
+            <div class="summary-status" id="sumCalStatus"></div>
+          </div>
+        </div>
+        
+        <!-- Protein -->
+        <div class="summary-card circular-card">
+          <div class="circular-progress-container">
+            <svg viewBox="0 0 100 100" class="circular-chart">
+              <circle class="circle-bg" cx="50" cy="50" r="40" />
+              <circle class="circle-path stroke-protein" id="sumProteinRing" cx="50" cy="50" r="40" stroke-dasharray="0, 251.2" />
+            </svg>
+            <div class="circular-content">
+              <div class="circular-icon">🍗</div>
+              <div class="circular-percent" id="sumProteinPercent">0%</div>
+            </div>
+          </div>
+          <div class="summary-info">
+            <div class="summary-label" data-i18n="dashboard.summaryProtein"></div>
+            <div class="summary-value"><span id="sumProteinVal">0</span> / <span id="sumProteinTarget">120</span> g</div>
+            <div class="summary-status" id="sumProteinStatus"></div>
+          </div>
+        </div>
+
+        <!-- Water -->
+        <div class="summary-card circular-card">
+          <div class="circular-progress-container">
+            <svg viewBox="0 0 100 100" class="circular-chart">
+              <circle class="circle-bg" cx="50" cy="50" r="40" />
+              <circle class="circle-path stroke-water" id="sumWaterRing" cx="50" cy="50" r="40" stroke-dasharray="0, 251.2" />
+            </svg>
+            <div class="circular-content">
+              <div class="circular-icon">💧</div>
+              <div class="circular-percent" id="sumWaterPercent">0%</div>
+            </div>
+          </div>
+          <div class="summary-info">
+            <div class="summary-label" data-i18n="dashboard.summaryWater"></div>
+            <div class="summary-value"><span id="sumWaterVal">0</span> / <span id="sumWaterTarget">2.0</span> L</div>
+            <div class="summary-status" id="sumWaterStatus"></div>
+          </div>
+        </div>
+
+        <!-- Exercise (Metric Card) -->
+        <div class="summary-card metric-card">
+          <div class="metric-icon-wrapper">
+            <div class="summary-icon">🏃</div>
+          </div>
+          <div class="summary-info">
+            <div class="summary-label" data-i18n="dashboard.summaryExercise"></div>
+            <div class="summary-value"><span id="sumExerciseVal">0</span> kcal</div>
+            <div class="summary-status" data-i18n="dashboard.today">Hôm nay</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TREND CHART -->
+      <div class="dashboard-panel trend-panel" style="margin-bottom: 2rem;">
+        <div class="panel-header trend-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h2 class="panel-title" data-i18n="dashboard.trendTitle">Tiến độ 7 ngày</h2>
+          <select id="trendSelector" class="form-control trend-selector" style="width: auto; display: inline-block;">
+            <option value="calories" data-i18n="dashboard.trendCalories">Calories</option>
+            <option value="protein" data-i18n="dashboard.trendProtein">Protein</option>
+            <option value="water" data-i18n="dashboard.trendWater">Water</option>
+            <option value="weight" data-i18n="dashboard.trendWeight">Weight</option>
+          </select>
+        </div>
+        <div class="trend-chart-container" style="height: 250px; position: relative;">
+          <canvas id="trendChartCanvas" width="800" height="250" style="width: 100%; height: 100%;"></canvas>
+          <div id="trendEmptyState" class="trend-empty-state" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-muted); background: var(--surface-light); border-radius: var(--radius-md);">
+            <p data-i18n="dashboard.trendEmpty">Chưa đủ dữ liệu để hiển thị xu hướng. Hãy tiếp tục theo dõi trong những ngày tới.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD MAIN GRID -->
+      <div class="dashboard-grid">
+        
+        <!-- LEFT COLUMN -->
+        <div class="dashboard-col">
+          
+          <!-- NUTRITION PANEL -->
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <h2 class="panel-title" data-i18n="dashboard.dailyNutrition"></h2>
+            </div>
+            
+            <!-- ENERGY BALANCE DONUT -->
+            <div class="energy-balance" id="energyBalance">
+              <div class="donut-container">
+                <svg class="donut-chart" viewBox="0 0 200 200" id="calorieDonut" aria-label="Calorie progress chart">
+                  <circle class="donut-bg" cx="100" cy="100" r="80" />
+                  <circle class="donut-progress" cx="100" cy="100" r="80" id="donutProgress" />
+                </svg>
+                <div class="donut-center" id="donutCenter">
+                  <span class="donut-value" id="donutValue">0</span>
+                  <span class="donut-unit">kcal</span>
+                  <span class="donut-percent" id="donutPercent">0%</span>
+                </div>
+              </div>
+
+              <div class="energy-details">
+                <div class="energy-detail-row energy-consumed">
+                  <span class="energy-dot consumed-dot"></span>
+                  <span class="energy-label" data-i18n="dashboard.caloriesConsumed"></span>
+                  <span class="energy-val" id="energyConsumedVal">0 kcal</span>
+                </div>
+                <div class="energy-detail-row energy-remaining">
+                  <span class="energy-dot remaining-dot"></span>
+                  <span class="energy-label" data-i18n="dashboard.caloriesRemaining"></span>
+                  <span class="energy-val" id="energyRemainingVal">0 kcal</span>
+                </div>
+                <div class="energy-detail-row energy-target">
+                  <span class="energy-dot target-dot"></span>
+                  <span class="energy-label" data-i18n="dashboard.caloriesTarget"></span>
+                  <span class="energy-val" id="energyTargetVal">0 kcal</span>
+                </div>
+              </div>
+
+              <div class="energy-secondary" id="energySecondary">
+                <div class="energy-secondary-item">
+                  <span class="energy-secondary-label" data-i18n="dashboard.bmrLabel"></span>
+                  <span class="energy-secondary-val" id="energyBmrVal">-- kcal</span>
+                </div>
+                <div class="energy-secondary-item">
+                  <span class="energy-secondary-label" data-i18n="dashboard.tdeeLabel"></span>
+                  <span class="energy-secondary-val" id="energyTdeeVal">-- kcal</span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="macro-list">
+              <div class="macro-row">
+                <div class="macro-header">
+                  <span class="macro-name" data-i18n="card.protein"></span>
+                </div>
+                <div class="macro-progress">
+                  <div class="summary-progress-fill fill-protein" id="panelProteinProg" style="width: 0%"></div>
+                </div>
+              </div>
+            </div>
+
+            <a href="calculator.html" class="btn btn-primary" style="width: 100%; text-align: center;" data-i18n="dashboard.updateNutrition"></a>
+          </div>
+
+          <div style="margin-top: 2rem;"></div>
+
+          <!-- WEIGHT TRACKER PANEL -->
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <h2 class="panel-title" data-i18n="dashboard.weightProgress"></h2>
+            </div>
+
+            <div class="weight-stats">
+              <div class="weight-stat">
+                <span data-i18n="dashboard.weightStart"></span>
+                <strong id="weightStartVal">-- kg</strong>
+              </div>
+              <div class="weight-stat">
+                <span data-i18n="dashboard.weightCurrent"></span>
+                <strong id="weightCurrentVal">-- kg</strong>
+              </div>
+              <div class="weight-stat">
+                <span data-i18n="dashboard.weightGoal"></span>
+                <strong id="weightGoalVal">-- kg</strong>
+              </div>
+            </div>
+
+            <div class="weight-chart-container">
+              <canvas id="weightChartCanvas" width="500" height="200" style="width: 100%; height: 100%;"></canvas>
+            </div>
+
+            <div class="weight-input-group">
+              <input type="number" id="weightInput" class="form-control" placeholder="65.5" step="0.1" min="1">
+              <button id="btnLogWeight" class="btn btn-secondary" data-i18n="dashboard.weightAddRecord"></button>
+            </div>
+
+            <div class="panel-header" style="margin-bottom: 0.5rem; margin-top: 1rem;">
+              <h3 class="panel-title" style="font-size: 1rem;" data-i18n="dashboard.weightHistoryTitle"></h3>
+              <button id="btnClearWeight" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" data-i18n="dashboard.weightClearAll"></button>
+            </div>
+            <div class="weight-history-list" id="weightHistoryList">
+              <!-- JS will populate history -->
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem;"></div>
+
+          <!-- PERSONALIZED GOAL SECTION -->
+          <div class="dashboard-panel" id="goalRecommendationPanel">
+            <div class="panel-header">
+              <h2 class="panel-title" data-i18n="dashboard.goalSectionTitle"></h2>
+            </div>
+
+            <!-- Empty state: no weight -->
+            <div class="goal-empty-state" id="goalNoWeightState" style="display:none;">
+              <div class="goal-empty-icon">⚖️</div>
+              <p class="goal-empty-text" data-i18n="dashboard.goalNoWeight"></p>
+              <button class="btn btn-secondary goal-empty-btn" id="btnGoalLogWeight" data-i18n="dashboard.recLogWeight"></button>
+            </div>
+
+            <!-- Empty state: no goal -->
+            <div class="goal-empty-state" id="goalNoTargetState" style="display:none;">
+              <div class="goal-empty-icon">🎯</div>
+              <p class="goal-empty-text" data-i18n="dashboard.goalNoTarget"></p>
+              <div class="goal-set-row" id="goalSetRow">
+                <input type="number" id="weightGoalInput" class="form-control" step="0.1" min="1" max="300" data-i18n-placeholder="dashboard.goalInputPlaceholder">
+                <button class="btn btn-primary" id="btnSaveWeightGoal" data-i18n="dashboard.goalSetBtn"></button>
+              </div>
+            </div>
+
+            <!-- Goal summary (shown when both data exist) -->
+            <div class="goal-summary" id="goalSummaryBlock" style="display:none; text-align: center;">
+              <h3 id="goalMainTitle" style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 600;">--</h3>
+              <p id="goalTargetDisplay" style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.25rem;">--</p>
+              <div class="goal-summary-actions" style="justify-content: center; margin-bottom: 1rem;">
+                <a href="exercises.html" class="btn btn-secondary btn-sm" data-i18n="dashboard.recViewExercise"></a>
+                <a href="meals.html" class="btn btn-secondary btn-sm" data-i18n="dashboard.recViewMeals"></a>
+              </div>
+              <!-- Inline goal edit -->
+              <div class="goal-edit-row" id="goalEditRow">
+                <input type="number" id="weightGoalEditInput" class="form-control form-control-sm" step="0.1" min="1" max="300">
+                <button class="btn btn-secondary btn-sm" id="btnUpdateWeightGoal" data-i18n="dashboard.goalSaveBtn"></button>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem;"></div>
+
+          <!-- EXERCISE RECOMMENDATIONS -->
+          <div class="dashboard-panel" id="recExercisePanel" style="display:none;">
+            <div class="panel-header">
+              <h2 class="panel-title" data-i18n="dashboard.recExerciseTitle"></h2>
+            </div>
+            <div class="rec-grid" id="recExerciseGrid">
+              <!-- JS will populate -->
+            </div>
+            <a href="exercises.html" class="btn btn-secondary rec-view-all-btn" data-i18n="dashboard.recViewAllExercises"></a>
+          </div>
+
+          <div style="margin-top: 2rem;"></div>
+
+          <!-- MEAL RECOMMENDATIONS -->
+          <div class="dashboard-panel" id="recMealPanel" style="display:none;">
+            <div class="panel-header">
+              <h2 class="panel-title" data-i18n="dashboard.recMealTitle"></h2>
+            </div>
+            <div class="rec-grid" id="recMealGrid">
+              <!-- JS will populate -->
+            </div>
+            <div class="rec-meal-actions">
+              <a href="meals.html" class="btn btn-secondary rec-view-all-btn" data-i18n="dashboard.recViewMealPlanner"></a>
+              <a href="grocery.html" class="btn btn-secondary rec-view-all-btn" id="btnGoToGrocery" data-i18n="dashboard.recGroceryBtn"></a>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="dashboard-col">
+          
+          <!-- WATER TRACKER PANEL -->
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <h2 class="panel-title" data-i18n="dashboard.waterIntake"></h2>
+              <button id="btnWaterReset" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" data-i18n="dashboard.waterReset"></button>
+            </div>
+            
+            <div class="water-visual">
+              <div class="water-fill" id="waterFill" style="height: 0%"></div>
+              <div class="water-text">
+                <h3><span id="waterCurrentVal">0</span> / <span id="waterTargetVal">2000</span> ml</h3>
+              </div>
+            </div>
+
+            <div class="water-actions">
+              <button class="btn-water" id="btnWater250" data-i18n="dashboard.waterAdd250"></button>
+              <button class="btn-water" id="btnWater500" data-i18n="dashboard.waterAdd500"></button>
+              <button class="btn-water" id="btnWater750" data-i18n="dashboard.waterAdd750"></button>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem;"></div>
+
+          <!-- GOAL & ACTIVITY PANEL -->
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <h2 class="panel-title" data-i18n="dashboard.yourGoal"></h2>
+            </div>
+            <p id="panelGoalType" style="font-weight: 600; color: var(--primary-color); font-size: 1.1rem; margin-bottom: 1.5rem;" data-i18n="dashboard.goalSetup"></p>
+
+            <div class="panel-header" style="border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+              <h2 class="panel-title" data-i18n="dashboard.todayActivity"></h2>
+            </div>
+            
+            <div class="weight-stats" style="margin-bottom: 1.5rem;">
+              <div class="weight-stat">
+                <span data-i18n="dashboard.activityCalories"></span>
+                <strong>320 kcal</strong>
+              </div>
+              <div class="weight-stat">
+                <span data-i18n="dashboard.activityTime"></span>
+                <strong>45 min</strong>
+              </div>
+              <div class="weight-stat">
+                <span data-i18n="dashboard.activityCount"></span>
+                <strong>2</strong>
+              </div>
+            </div>
+            <a href="exercises.html" class="btn btn-secondary" style="width: 100%; text-align: center;" data-i18n="dashboard.exploreExercises"></a>
+          </div>
+
+          <div style="margin-top: 2rem;"></div>
+
+          <!-- QUICK ACTIONS PANEL -->
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <h2 class="panel-title" data-i18n="dashboard.quickActions"></h2>
+            </div>
+            
+            <div class="quick-actions-grid">
+              <a href="calculator.html" class="action-card">
+                <span class="action-icon">🧮</span>
+                <span data-i18n="dashboard.actionCalc"></span>
+              </a>
+              <a href="#waterFill" class="action-card">
+                <span class="action-icon">💧</span>
+                <span data-i18n="dashboard.actionWater"></span>
+              </a>
+              <a href="#weightInput" class="action-card">
+                <span class="action-icon">⚖️</span>
+                <span data-i18n="dashboard.actionWeight"></span>
+              </a>
+              <a href="exercises.html" class="action-card">
+                <span class="action-icon">🏋️</span>
+                <span data-i18n="dashboard.actionExercise"></span>
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-container">
+      
+      <!-- Brand & Description -->
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" aria-label="NutriCare Home">
+          <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+          <span class="nav-logo-text">NutriCare</span>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc"></p>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="footer-nav">
+        <h4 class="footer-nav-title" data-i18n="footer.navTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="../index.html" class="footer-link" data-i18n="footer.linkHome"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalculator"></a></li>
+          <li><a href="foods.html" class="footer-link" data-i18n="footer.linkFoods"></a></li>
+          <li><a href="meals.html" class="footer-link" data-i18n="footer.linkMeals"></a></li>
+        </ul>
+      </div>
+
+      <!-- Tools -->
+      <div class="footer-tools">
+        <h4 class="footer-nav-title" data-i18n="footer.toolsTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkBmi"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalorie"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkPlanner"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy" data-i18n="footer.copy"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../data/translations.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../data/foods.js"></script>
+  <script src="../data/recipes.js"></script>
+  <script src="../data/exercises.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

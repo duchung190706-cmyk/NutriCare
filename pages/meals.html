@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriCare - Smart Meal Planner" data-i18n="meals.metaDesc" />
+  <title data-i18n="meals.metaTitle">NutriCare – Kế hoạch bữa ăn</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet" href="../css/meals.css" />
+  <link rel="stylesheet" href="../css/cook.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo" aria-label="NutriCare Home">
+        <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+        <span class="nav-logo-text">NutriCare</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="../index.html"   class="nav-link"        data-i18n="nav.home"></a>
+        <a href="dashboard.html" class="nav-link"        data-i18n="nav.dashboard"></a>
+        <a href="calculator.html" class="nav-link"        data-i18n="nav.calculator"></a>
+        <a href="foods.html"     class="nav-link"        data-i18n="nav.foods"></a>
+        <a href="meals.html"     class="nav-link active" data-i18n="nav.meals"></a>
+        <a href="guide.html"     class="nav-link"        data-i18n="nav.guide"></a>
+        <a href="exercises.html" class="nav-link"        data-i18n="nav.exercises"></a>
+        <a href="grocery.html"     class="nav-link"        data-i18n="nav.grocery"></a>
+        <a href="order.html"       class="nav-link"        data-i18n="nav.order"></a>
+        <a href="meals.html"     class="nav-link nav-link-cta" data-i18n="nav.myMeals"></a>
+
+        <div class="lang-switcher" role="group" aria-label="Language options" id="langSwitcher">
+          <button class="lang-btn lang-btn-vi active" id="btnVI" data-lang="vi" aria-pressed="true" title="Tieng Viet">🇻🇳 VI</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn lang-btn-en" id="btnEN" data-lang="en" aria-pressed="false" title="English">🇬🇧 EN</button>
+        </div>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <section class="meals-hero">
+      <div class="container">
+        <span class="meals-hero-badge" data-i18n="meals.heroBadge"></span>
+        <h1 class="meals-hero-title" data-i18n="meals.heroTitle"></h1>
+        <p class="meals-hero-subtitle" data-i18n="meals.heroSubtitle"></p>
+
+        <div class="hero-actions" id="heroActions" style="display: none;">
+          <button class="btn-generate" id="btnGenerate" data-i18n="meals.btnGenerate"></button>
+          <button class="btn-reset" id="btnReset" data-i18n="meals.btnReset"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MAIN CONTENT
+    ============================================================ -->
+    <div class="container">
+      
+      <!-- No Goal State -->
+      <div class="no-goal-panel" id="noGoalPanel">
+        <div class="no-goal-icon" aria-hidden="true">🎯</div>
+        <h2 class="no-goal-title" data-i18n="meals.noGoalTitle"></h2>
+        <p class="no-goal-text" data-i18n="meals.noGoalText"></p>
+        <a href="calculator.html" class="btn-generate" style="display: inline-block; text-decoration: none;" data-i18n="meals.btnGoCalc"></a>
+      </div>
+
+      <!-- Loaded State -->
+      <div class="meals-layout" id="mealsLayout" style="display: none;">
+        
+        <!-- DAILY SUMMARY -->
+        <div class="summary-card">
+          <div class="summary-header">
+            <h2 class="summary-title" data-i18n="meals.summaryTitle"></h2>
+            <button class="btn-update-goal" id="btnUpdateGoal" data-i18n="meals.btnUpdateGoal"></button>
+          </div>
+          
+          <div class="macro-bars">
+            <!-- Calories -->
+            <div class="macro-bar-item">
+              <div class="mb-header">
+                <span class="mb-title">Calories</span>
+                <span class="mb-vals"><strong id="valCalA">0</strong> / <span id="valCalT">0</span></span>
+              </div>
+              <div class="mb-track"><div class="mb-fill fill-cal" id="barCal" style="width: 0%"></div></div>
+              <div class="mb-vals" style="text-align: left; margin-top: 4px;">
+                <span data-i18n="meals.lblRemain"></span>: <strong id="valCalR">0</strong>
+              </div>
+            </div>
+            
+            <!-- Protein -->
+            <div class="macro-bar-item">
+              <div class="mb-header">
+                <span class="mb-title" data-i18n="calculator.macroProtein"></span>
+                <span class="mb-vals"><strong id="valProA">0</strong> / <span id="valProT">0</span>g</span>
+              </div>
+              <div class="mb-track"><div class="mb-fill fill-pro" id="barPro" style="width: 0%"></div></div>
+              <div class="mb-vals" style="text-align: left; margin-top: 4px;">
+                <span data-i18n="meals.lblRemain"></span>: <strong id="valProR">0</strong>g
+              </div>
+            </div>
+
+            <!-- Carbs -->
+            <div class="macro-bar-item">
+              <div class="mb-header">
+                <span class="mb-title" data-i18n="calculator.macroCarbs"></span>
+                <span class="mb-vals"><strong id="valCarbA">0</strong> / <span id="valCarbT">0</span>g</span>
+              </div>
+              <div class="mb-track"><div class="mb-fill fill-carb" id="barCarb" style="width: 0%"></div></div>
+              <div class="mb-vals" style="text-align: left; margin-top: 4px;">
+                <span data-i18n="meals.lblRemain"></span>: <strong id="valCarbR">0</strong>g
+              </div>
+            </div>
+
+            <!-- Fat -->
+            <div class="macro-bar-item">
+              <div class="mb-header">
+                <span class="mb-title" data-i18n="calculator.macroFat"></span>
+                <span class="mb-vals"><strong id="valFatA">0</strong> / <span id="valFatT">0</span>g</span>
+              </div>
+              <div class="mb-track"><div class="mb-fill fill-fat" id="barFat" style="width: 0%"></div></div>
+              <div class="mb-vals" style="text-align: left; margin-top: 4px;">
+                <span data-i18n="meals.lblRemain"></span>: <strong id="valFatR">0</strong>g
+              </div>
+            </div>
+          </div>
+
+          <!-- SMART RECOMMENDATION BOX -->
+          <div class="recommendation-box" id="recBox">
+            <div class="rec-icon" id="recIcon">💡</div>
+            <div class="rec-content">
+              <h4 data-i18n="meals.recTitle"></h4>
+              <p id="recText"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MEALS LIST -->
+        <div class="meal-list">
+          
+          <!-- BREAKFAST -->
+          <div class="meal-card" data-meal="breakfast">
+            <div class="meal-header">
+              <h3 class="meal-title"><span aria-hidden="true">🌅</span> <span data-i18n="meals.mealBreakfast"></span></h3>
+              <div class="meal-totals">
+                <span data-i18n="meals.totalMealKcal"></span> <span id="tot-breakfast">0</span> kcal
+              </div>
+            </div>
+            <div class="meal-foods" id="list-breakfast">
+              <!-- Rendered via JS -->
+            </div>
+            <button class="btn-add-food" onclick="openFoodSelector('breakfast')">
+              <span aria-hidden="true">+</span> <span data-i18n="meals.btnAddFood"></span>
+            </button>
+          </div>
+
+          <!-- LUNCH -->
+          <div class="meal-card" data-meal="lunch">
+            <div class="meal-header">
+              <h3 class="meal-title"><span aria-hidden="true">☀️</span> <span data-i18n="meals.mealLunch"></span></h3>
+              <div class="meal-totals">
+                <span data-i18n="meals.totalMealKcal"></span> <span id="tot-lunch">0</span> kcal
+              </div>
+            </div>
+            <div class="meal-foods" id="list-lunch"></div>
+            <button class="btn-add-food" onclick="openFoodSelector('lunch')">
+              <span aria-hidden="true">+</span> <span data-i18n="meals.btnAddFood"></span>
+            </button>
+          </div>
+
+          <!-- DINNER -->
+          <div class="meal-card" data-meal="dinner">
+            <div class="meal-header">
+              <h3 class="meal-title"><span aria-hidden="true">🌙</span> <span data-i18n="meals.mealDinner"></span></h3>
+              <div class="meal-totals">
+                <span data-i18n="meals.totalMealKcal"></span> <span id="tot-dinner">0</span> kcal
+              </div>
+            </div>
+            <div class="meal-foods" id="list-dinner"></div>
+            <button class="btn-add-food" onclick="openFoodSelector('dinner')">
+              <span aria-hidden="true">+</span> <span data-i18n="meals.btnAddFood"></span>
+            </button>
+          </div>
+
+          <!-- SNACK -->
+          <div class="meal-card" data-meal="snack">
+            <div class="meal-header">
+              <h3 class="meal-title"><span aria-hidden="true">🍎</span> <span data-i18n="meals.mealSnack"></span></h3>
+              <div class="meal-totals">
+                <span data-i18n="meals.totalMealKcal"></span> <span id="tot-snack">0</span> kcal
+              </div>
+            </div>
+            <div class="meal-foods" id="list-snack"></div>
+            <button class="btn-add-food" onclick="openFoodSelector('snack')">
+              <span aria-hidden="true">+</span> <span data-i18n="meals.btnAddFood"></span>
+            </button>
+          </div>
+
+        </div> <!-- /.meal-list -->
+      </div> <!-- /.meals-layout -->
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOD SELECTION MODAL
+  ============================================================ -->
+  <div class="meal-modal-overlay" id="foodModal">
+    <div class="meal-modal" role="dialog" aria-modal="true" aria-labelledby="mmTitle">
+      <div class="mm-header">
+        <h2 class="mm-title" id="mmTitle" data-i18n="meals.modalTitle"></h2>
+        <button class="mm-close" id="btnModalClose">&times;</button>
+      </div>
+      <div class="mm-body">
+        
+        <div class="mm-search-bar">
+          <input type="text" id="mmSearch" data-i18n-ph="meals.modalSearchPh" />
+          <select id="mmCategory">
+            <option value="all" data-i18n="foods.filterCat"></option>
+            <option value="Grains" data-i18n="foods.catGrains"></option>
+            <option value="Protein" data-i18n="foods.catProtein"></option>
+            <option value="Dairy" data-i18n="foods.catDairy"></option>
+            <option value="Fruits" data-i18n="foods.catFruits"></option>
+            <option value="Vegetables" data-i18n="foods.catVegetables"></option>
+            <option value="Nuts & Seeds" data-i18n="foods.catNutsSeeds"></option>
+            <option value="Legumes" data-i18n="foods.catLegumes"></option>
+          </select>
+        </div>
+
+        <div class="mm-food-list" id="mmFoodList">
+          <!-- Rendered via JS -->
+        </div>
+
+        <div class="mm-gram-entry">
+          <label for="mmGrams" data-i18n="meals.modalGrams"></label>
+          <input type="number" id="mmGrams" min="1" max="1000" value="100" />
+          <div class="mm-calc-preview" id="mmPreview">
+            <!-- e.g. 150 kcal | 10g Pro | 5g Carb | 2g Fat -->
+          </div>
+        </div>
+
+      </div>
+      <div class="mm-footer">
+        <button class="btn-mm-cancel" id="btnModalCancel">Hủy</button>
+        <button class="btn-mm-save" id="btnModalSave" data-i18n="meals.btnSaveFood" disabled></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo footer-logo" aria-label="NutriCare Home">
+          <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+          <span class="nav-logo-text">NutriCare</span>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc"></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-nav-title" data-i18n="footer.navTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="../index.html"   class="footer-link" data-i18n="footer.linkHome"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalculator"></a></li>
+          <li><a href="foods.html"      class="footer-link" data-i18n="footer.linkFoods"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkMeals"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-tools">
+        <h4 class="footer-nav-title" data-i18n="footer.toolsTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkBmi"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalorie"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkPlanner"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy" data-i18n="footer.copy"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../data/translations.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../data/foods.js"></script>
+  <script src="../data/recipes.js"></script>
+  <script src="../js/meals.js"></script>
+  <script src="../js/cook.js"></script>
+</body>
+</html>
+
+

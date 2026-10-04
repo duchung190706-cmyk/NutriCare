@@ -1,0 +1,619 @@
+/*
+ * NutriCare – css/cook.css
+ * ============================================================
+ * Styles for the Cook Mode modal.
+ * All styles are scoped to .cook-* to avoid conflicts.
+ * Tokens come from style.css.
+ * ============================================================
+ */
+
+/* ============================================================
+   COOK MODAL OVERLAY
+============================================================ */
+.cook-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.cook-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cook-modal {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 680px;
+  margin: 2rem auto;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+  transform: translateY(30px) scale(0.96);
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.cook-overlay.active .cook-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* ── CLOSE BUTTON ─────────────────────────────────────────── */
+.cook-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: var(--color-bg);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.375rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  z-index: 2;
+}
+
+.cook-modal-close:hover {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+/* ── NO RECIPE STATE ─────────────────────────────────────── */
+.cook-no-recipe {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.cook-no-recipe-icon { font-size: 3rem; margin-bottom: 1rem; }
+.cook-no-recipe-text {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================
+   RECIPE HEADER
+============================================================ */
+.cook-header {
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cook-recipe-name {
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  padding-right: 2.5rem;
+  line-height: 1.2;
+}
+
+.cook-recipe-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+/* Meta chips row */
+.cook-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cook-meta-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.cook-meta-chip span.chip-icon { font-style: normal; }
+.cook-meta-chip.diff-easy   { background: #DCFCE7; border-color: #BBF7D0; color: #166534; }
+.cook-meta-chip.diff-medium { background: #FEF9C3; border-color: #FDE68A; color: #854D0E; }
+.cook-meta-chip.diff-hard   { background: #FEE2E2; border-color: #FECACA; color: #991B1B; }
+
+/* ============================================================
+   COOK BODY TABS
+============================================================ */
+.cook-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cook-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 2rem;
+}
+
+.cook-tab {
+  padding: 0.875rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: -1px;
+}
+
+.cook-tab:hover { color: var(--color-text); }
+.cook-tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* ── TAB PANELS ─────────────────────────────────────────── */
+.cook-tab-panel {
+  display: none;
+  padding: 1.5rem 2rem;
+}
+
+.cook-tab-panel.active { display: block; }
+
+/* ============================================================
+   INGREDIENTS TAB
+============================================================ */
+.cook-serving-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed var(--color-border);
+  flex-wrap: wrap;
+}
+
+.cook-serving-label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.cook-serving-btns {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.cook-serving-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cook-serving-btn.active,
+.cook-serving-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.ingredient-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all 0.15s;
+}
+
+.ingredient-row:hover { border-color: var(--color-primary-light); }
+
+.ingredient-name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.ingredient-optional {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin-left: 0.5rem;
+}
+
+.ingredient-qty {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Nutrition per serving */
+.cook-nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--color-border);
+}
+
+.cook-nut-item {
+  text-align: center;
+}
+
+.cook-nut-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.cook-nut-lbl {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* ============================================================
+   STEPS TAB
+============================================================ */
+.steps-view-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.steps-view-btn {
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  transition: all 0.15s;
+}
+
+.steps-view-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ALL steps view */
+.steps-all-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.step-all-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.step-text {
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  padding-top: 0.375rem;
+}
+
+/* STEP-BY-STEP view */
+.step-by-step {
+  text-align: center;
+}
+
+.step-progress {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.step-progress-bar {
+  height: 4px;
+  background: var(--color-bg);
+  border-radius: 2px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.step-progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.step-current-num {
+  width: 52px;
+  height: 52px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 auto 1.5rem;
+}
+
+.step-current-text {
+  font-size: 1.0625rem;
+  color: var(--color-text);
+  line-height: 1.7;
+  min-height: 80px;
+  margin-bottom: 2rem;
+}
+
+.step-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-step-nav {
+  padding: 0.75rem 1.5rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: all 0.15s;
+}
+
+.btn-step-nav:hover:not(:disabled) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-step-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   TIMER TAB
+============================================================ */
+.cook-timer {
+  text-align: center;
+}
+
+.timer-display {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  margin: 1rem 0;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s;
+}
+
+.timer-display.done { color: #DC2626; }
+
+.timer-set-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.timer-set-row input {
+  width: 80px;
+  padding: 0.625rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+
+.timer-set-row input:focus { border-color: var(--color-primary); }
+
+.timer-set-row label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.timer-controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-timer {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.15s;
+}
+
+.btn-timer-start {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+.btn-timer-start:hover { background: var(--color-primary-dark); }
+
+.btn-timer-pause {
+  background: #FFFBEB;
+  color: #B45309;
+  border-color: #FDE68A;
+}
+.btn-timer-pause:hover { background: #FEF3C7; }
+
+.btn-timer-reset {
+  background: var(--color-white);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+.btn-timer-reset:hover { background: var(--color-bg); }
+
+.timer-done-msg {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #DC2626;
+  display: none;
+}
+
+.timer-done-msg.visible { display: block; }
+
+/* ============================================================
+   COOK FOOTER
+============================================================ */
+.cook-footer {
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-done-cooking {
+  padding: 0.75rem 1.75rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-done-cooking:hover { background: var(--color-primary-dark); }
+
+/* ── DONE STATE ─────────────────────────────────────────── */
+.cook-done-state {
+  padding: 3rem 2rem;
+  text-align: center;
+  display: none;
+}
+
+.cook-done-state.visible { display: block; }
+
+.cook-done-icon { font-size: 4rem; margin-bottom: 1rem; }
+
+.cook-done-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.cook-done-text {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.btn-cook-again {
+  padding: 0.75rem 2rem;
+  background: var(--color-white);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.btn-cook-again:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ── COOK BUTTON ON MEAL FOOD ROW ─────────────────────── */
+.btn-cook-meal {
+  padding: 0.375rem 0.625rem;
+  background: #FFF7ED;
+  border: 1px solid #FED7AA;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #C2410C;
+  transition: all 0.15s;
+}
+
+.btn-cook-meal:hover {
+  background: #FFEDD5;
+  border-color: #C2410C;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 767px) {
+  .cook-modal { margin: 0.5rem auto; border-radius: 1rem; }
+  .cook-header { padding: 1.5rem 1.25rem 1.25rem; }
+  .cook-tabs { padding: 0 1.25rem; }
+  .cook-tab { padding: 0.75rem 0.875rem; font-size: 0.875rem; }
+  .cook-tab-panel { padding: 1.25rem; }
+  .cook-nutrition-grid { grid-template-columns: repeat(2, 1fr); }
+  .cook-footer { padding: 1rem 1.25rem; }
+}

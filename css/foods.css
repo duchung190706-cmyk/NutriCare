@@ -1,0 +1,554 @@
+﻿/*
+ * NutriCare – css/foods.css
+ * ============================================================
+ * Styles for the Foods database module.
+ * Uses existing tokens from style.css.
+ * ============================================================
+ */
+
+/* ============================================================
+   1. FOODS HERO & FILTERS
+============================================================ */
+.foods-hero {
+  background: linear-gradient(150deg, #F0F9FF 0%, #E0F2FE 50%, #F0F9FF 100%);
+  padding: 3.5rem 0 3rem;
+  border-bottom: 1px solid rgba(209, 213, 219, 0.4);
+  text-align: center;
+}
+
+.foods-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 1rem;
+  background: var(--color-blue-light);
+  color: var(--color-blue);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+.foods-hero-title {
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  font-weight: 800;
+  color: #1E3A8A; /* dark blue */
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+  line-height: 1.15;
+}
+
+.foods-hero-subtitle {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+
+/* SEARCH & FILTER BAR */
+.foods-toolbar {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--color-white);
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(209, 213, 219, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.foods-search {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.foods-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+}
+
+.foods-search-input {
+  width: 100%;
+  padding: 0.6875rem 1rem 0.6875rem 2.5rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.foods-search-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+.foods-filter-cat {
+  width: 180px;
+  padding: 0.6875rem 2.5rem 0.6875rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23667085' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+
+/* TAB NAVIGATION (All / Favorites) */
+.foods-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: -1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.food-tab-btn {
+  padding: 0.625rem 1.5rem;
+  background: var(--color-white);
+  border: 1px solid rgba(209, 213, 219, 0.5);
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.food-tab-btn.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.35);
+}
+
+/* ============================================================
+   2. FILTER TAGS (High protein, low cal, etc.)
+============================================================ */
+.quick-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem 0 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-tag-btn {
+  padding: 0.375rem 1rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-tag-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.filter-tag-btn.active {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ============================================================
+   3. FOOD GRID & CARDS
+============================================================ */
+.foods-main {
+  padding: 1rem 0 4rem;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--color-border);
+}
+
+.food-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  border: 1px solid rgba(209, 213, 219, 0.5);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-light);
+}
+
+.food-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.food-card-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+  margin-right: 2rem; /* space for fav btn */
+}
+
+.food-card-category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+/* Fav button */
+.btn-fav {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--color-border);
+  cursor: pointer;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-fav:hover {
+  transform: scale(1.1);
+}
+
+.btn-fav.active {
+  color: #EF4444; /* Red heart */
+}
+
+/* Nutrition mini grid */
+.food-card-macros {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  background: var(--color-bg);
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.mini-macro-val {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.mini-macro-lbl {
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+.mini-macro-unit {
+  font-size: 0.625rem;
+  color: var(--color-text-secondary);
+}
+
+/* Detail Button */
+.btn-view-food {
+  width: 100%;
+  padding: 0.625rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: auto;
+}
+
+.btn-view-food:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   4. FOOD DETAIL MODAL
+============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.food-modal {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(20px) scale(0.95);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.modal-overlay.active .food-modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: var(--color-bg);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.modal-header {
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid rgba(209, 213, 219, 0.4);
+}
+
+.modal-title {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+  padding-right: 2rem;
+}
+
+.modal-category {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.modal-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.modal-body {
+  padding: 1.5rem 2rem 2rem;
+}
+
+/* Tag pills */
+.modal-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tag-pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-full);
+}
+
+.tag-high-protein { background: #E0E7FF; color: #4338CA; }
+.tag-high-fiber   { background: #DCFCE7; color: #15803D; }
+.tag-low-fat      { background: #FEF3C7; color: #B45309; }
+.tag-low-calorie  { background: #FCE7F3; color: #BE185D; }
+
+/* Nutrition Facts Table (Standard) */
+.modal-section-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.nutrition-table th,
+.nutrition-table td {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9375rem;
+}
+
+.nutrition-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.nutrition-table td {
+  text-align: right;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* Calculator Section inside Modal */
+.serving-calculator {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  border: 1px solid rgba(209, 213, 219, 0.5);
+}
+
+.calc-input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.calc-input-row input {
+  flex: 1;
+  padding: 0.625rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  outline: none;
+}
+
+.calc-input-row input:focus {
+  border-color: var(--color-primary);
+}
+
+.calc-input-row button {
+  padding: 0 1.25rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.calc-input-row button:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Calculated Grid */
+.calc-result-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.calc-result-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.c-val {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.c-lbl {
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* ============================================================
+   5. RESPONSIVE
+============================================================ */
+@media (max-width: 767px) {
+  .foods-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .foods-filter-cat {
+    width: 100%;
+  }
+  .modal-header {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+  .modal-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+  .calc-result-grid {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 1rem;
+  }
+}

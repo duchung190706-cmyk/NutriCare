@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriCare – Huong dan dinh duong." data-i18n="guide.metaDesc" />
+  <title data-i18n="guide.metaTitle">NutriCare – Hướng dẫn dinh dưỡng</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet" href="../css/guide.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo" aria-label="NutriCare Home">
+        <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+        <span class="nav-logo-text">NutriCare</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="../index.html"   class="nav-link"        data-i18n="nav.home"></a>
+        <a href="dashboard.html" class="nav-link"        data-i18n="nav.dashboard"></a>
+        <a href="calculator.html" class="nav-link"        data-i18n="nav.calculator"></a>
+        <a href="foods.html"     class="nav-link"        data-i18n="nav.foods"></a>
+        <a href="meals.html"     class="nav-link"        data-i18n="nav.meals"></a>
+        <a href="guide.html"     class="nav-link active" data-i18n="nav.guide"></a>
+        <a href="exercises.html" class="nav-link"        data-i18n="nav.exercises"></a>
+        <a href="grocery.html"   class="nav-link"        data-i18n="nav.grocery"></a>
+        <a href="order.html"     class="nav-link"        data-i18n="nav.order"></a>
+        <a href="meals.html"     class="nav-link nav-link-cta" data-i18n="nav.myMeals"></a>
+
+        <div class="lang-switcher" role="group" aria-label="Language options" id="langSwitcher">
+          <button class="lang-btn lang-btn-vi active" id="btnVI" data-lang="vi" aria-pressed="true" title="Tieng Viet">🇻🇳 VI</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn lang-btn-en" id="btnEN" data-lang="en" aria-pressed="false" title="English">🇬🇧 EN</button>
+        </div>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="guide-hero">
+      <div class="container">
+        <span class="guide-hero-badge" data-i18n="guide.heroBadge"></span>
+        <h1 class="guide-hero-title" data-i18n="guide.heroTitle"></h1>
+        <p class="guide-hero-subtitle" data-i18n="guide.heroSubtitle"></p>
+        <div class="guide-disclaimer" data-i18n="guide.disclaimer"></div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- ============================================================
+           FEATURED TOPICS
+      ============================================================ -->
+      <section class="guide-featured">
+        <h2 class="guide-section-title" data-i18n="guide.featuredTitle"></h2>
+        <div class="featured-grid">
+          <div class="featured-card" data-id="g2">
+            <div class="featured-icon">🍗</div>
+            <div class="featured-title" id="featTitle1">Protein</div>
+          </div>
+          <div class="featured-card" data-id="g6">
+            <div class="featured-icon">🍽️</div>
+            <div class="featured-title" id="featTitle2">Balanced Meal</div>
+          </div>
+          <div class="featured-card" data-id="g5">
+            <div class="featured-icon">💧</div>
+            <div class="featured-title" id="featTitle3">Hydration</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           MAIN CONTENT
+      ============================================================ -->
+      <div class="guide-main">
+        <!-- TOOLBAR -->
+        <div class="guide-toolbar">
+          <input type="text" id="guideSearch" class="guide-search" data-i18n-ph="guide.searchPh" />
+          
+          <select id="filterCat" class="guide-filter">
+            <option value="all" data-i18n="guide.filterAll"></option>
+            <option value="basics" data-i18n="guide.catBasics"></option>
+            <option value="macros" data-i18n="guide.catMacros"></option>
+            <option value="hydration" data-i18n="guide.catHydration"></option>
+            <option value="meal-planning" data-i18n="guide.catMealPlanning"></option>
+            <option value="habits" data-i18n="guide.catHabits"></option>
+          </select>
+        </div>
+
+        <!-- GRID -->
+        <div class="guide-grid" id="guideGrid"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       ARTICLE MODAL
+  ============================================================ -->
+  <div class="guide-modal-overlay" id="guideModalOverlay">
+    <div class="guide-modal" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="guide-modal-header">
+        <div>
+          <span class="guide-card-cat" id="modalCat" style="margin-bottom:0.25rem;"></span>
+          <h2 class="guide-modal-title" id="modalTitle"></h2>
+        </div>
+        <button class="btn-modal-close" id="btnModalClose" aria-label="Close modal" data-i18n-title="guide.btnClose">&times;</button>
+      </div>
+      
+      <div class="guide-modal-body">
+        <!-- Content injected dynamically -->
+        <div class="guide-modal-content" id="modalContent"></div>
+        
+        <!-- Contextual cross-module links -->
+        <div id="modalContextLinkContainer"></div>
+
+        <div class="guide-modal-tags" id="modalTags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo footer-logo" aria-label="NutriCare Home">
+          <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+          <span class="nav-logo-text">NutriCare</span>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc"></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-nav-title" data-i18n="footer.navTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="../index.html"   class="footer-link" data-i18n="footer.linkHome"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalculator"></a></li>
+          <li><a href="foods.html"      class="footer-link" data-i18n="footer.linkFoods"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkMeals"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-tools">
+        <h4 class="footer-nav-title" data-i18n="footer.toolsTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkBmi"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalorie"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkPlanner"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy" data-i18n="footer.copy"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../data/translations.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../data/guide.js"></script>
+  <script src="../js/guide.js"></script>
+</body>
+</html>

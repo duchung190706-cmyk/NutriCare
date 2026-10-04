@@ -1,0 +1,558 @@
+﻿/*
+ * NutriCare - css/calculator.css
+ * Styles for the Nutrition Calculator page.
+ * Relies on css/style.css for design tokens and base styles.
+ */
+
+/* ============================================================
+   1. CALCULATOR PAGE HERO
+============================================================ */
+.calc-hero {
+  background: linear-gradient(150deg, #F0FDF4 0%, #DCFCE7 50%, #F0FDF4 100%);
+  padding: 3.5rem 0 3rem;
+  border-bottom: 1px solid rgba(209, 213, 219, 0.4);
+  text-align: center;
+}
+.calc-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 1rem;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(46, 125, 50, 0.15);
+}
+.calc-hero-title {
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  font-weight: 800;
+  color: var(--color-dark-green);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+  line-height: 1.15;
+}
+.calc-hero-subtitle {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   2. MAIN LAYOUT
+============================================================ */
+.calc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 3rem 0 4rem;
+  align-items: start;
+}
+
+/* ============================================================
+   3. CALCULATOR FORM PANEL
+============================================================ */
+.calc-panel {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(209, 213, 219, 0.5);
+}
+.calc-panel-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.calc-panel-title .panel-icon { font-size: 1.375rem; }
+.calc-panel-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.75rem;
+}
+
+/* ============================================================
+   4. FORM ELEMENTS
+============================================================ */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.form-group.full-width { grid-column: 1 / -1; }
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.form-label .label-unit {
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+  margin-left: 0.25rem;
+}
+.form-control {
+  width: 100%;
+  padding: 0.6875rem 0.875rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form-control:focus {
+  border-color: var(--color-primary);
+  background: var(--color-white);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+.form-control.error { border-color: #EF4444; }
+select.form-control {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23667085' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Gender radio buttons */
+.gender-group { display: flex; gap: 0.75rem; }
+.gender-option { flex: 1; position: relative; }
+.gender-option input[type="radio"] {
+  position: absolute; opacity: 0; width: 0; height: 0;
+}
+.gender-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6875rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+.gender-label:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+.gender-option input[type="radio"]:checked + .gender-label {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 600;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+/* Validation */
+.field-error {
+  font-size: 0.8125rem;
+  color: #DC2626;
+  font-weight: 500;
+  display: none;
+}
+.field-error.visible { display: block; }
+
+/* Calculate button */
+.calc-submit-area {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.btn-calculate {
+  width: 100%;
+  justify-content: center;
+  padding: 0.9375rem 2rem;
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+}
+.calc-disclaimer {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   5. RESULTS PANEL
+============================================================ */
+.results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.results-empty {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: 3rem 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(209, 213, 219, 0.5);
+  text-align: center;
+}
+.results-empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  opacity: 0.6;
+}
+.results-empty-text {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+.results-loaded {
+  display: none;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.results-loaded.visible { display: flex; }
+
+/* BMI card */
+.bmi-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(209, 213, 219, 0.5);
+}
+.bmi-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+.bmi-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.bmi-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  margin-bottom: 0.75rem;
+}
+.bmi-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.bmi-category-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.875rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.bmi-underweight { background: #EFF6FF; color: #1D4ED8; }
+.bmi-normal      { background: #F0FDF4; color: #166534; }
+.bmi-overweight  { background: #FFF7ED; color: #C2410C; }
+.bmi-obesity     { background: #FEF2F2; color: #B91C1C; }
+
+/* BMI gradient scale */
+.bmi-scale {
+  position: relative;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #93C5FD 0%, #86EFAC 25%, #FCD34D 60%, #FCA5A5 100%);
+  margin-top: 0.75rem;
+  overflow: visible;
+}
+.bmi-scale-marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 3px solid var(--color-text);
+  box-shadow: var(--shadow-sm);
+  transition: left 0.4s ease;
+}
+.bmi-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+.bmi-scale-label {
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* Stats row: BMR / TDEE / Calories */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+.stat-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(209, 213, 219, 0.5);
+  text-align: center;
+  transition: all var(--transition-normal);
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.stat-icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.stat-unit {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  display: block;
+}
+.stat-label {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Calorie target card */
+.calorie-target-card {
+  background: linear-gradient(135deg, var(--color-dark-green) 0%, #2E7D32 100%);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-green);
+  position: relative;
+  overflow: hidden;
+}
+.calorie-target-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+.calorie-target-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; left: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.calorie-target-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+.calorie-target-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+}
+.calorie-target-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+.calorie-target-number {
+  font-size: 3.25rem;
+  font-weight: 800;
+  color: var(--color-white);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.calorie-target-unit {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+}
+.calorie-target-goal {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.calorie-target-goal span { color: #86EFAC; font-weight: 600; }
+.calorie-adjustments {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+.calorie-adj-item {
+  background: rgba(255,255,255,0.12);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+}
+.calorie-adj-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 0.25rem;
+}
+.calorie-adj-value {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+/* Macros card */
+.macros-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(209, 213, 219, 0.5);
+}
+.macros-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.macros-subtitle {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+.macro-rows { display: flex; flex-direction: column; gap: 1rem; }
+.macro-row-item { display: flex; flex-direction: column; gap: 0.375rem; }
+.macro-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.macro-row-left { display: flex; align-items: center; gap: 0.5rem; }
+.macro-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.macro-dot-protein { background: var(--color-primary); }
+.macro-dot-carbs   { background: #F59E0B; }
+.macro-dot-fat     { background: #EF4444; }
+.macro-row-name { font-size: 0.9375rem; font-weight: 600; color: var(--color-text); }
+.macro-row-right { text-align: right; }
+.macro-row-grams { font-size: 1rem; font-weight: 700; color: var(--color-text); }
+.macro-row-detail { font-size: 0.75rem; color: var(--color-text-secondary); }
+.macro-bar-bg {
+  width: 100%;
+  height: 7px;
+  background: #F3F4F6;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.macro-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+}
+.macro-fill-protein { background: var(--color-primary); }
+.macro-fill-carbs   { background: #F59E0B; }
+.macro-fill-fat     { background: #EF4444; }
+
+/* Saved to dashboard notice */
+.saved-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--color-primary-light);
+  border: 1px solid rgba(46,125,50,0.2);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+.saved-notice-icon { font-size: 1.125rem; flex-shrink: 0; }
+
+/* ============================================================
+   6. INFO SECTION
+============================================================ */
+.calc-info-section {
+  padding: 3rem 0 4rem;
+  background: var(--color-white);
+  border-top: 1px solid rgba(209, 213, 219, 0.4);
+}
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.info-card {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid rgba(209, 213, 219, 0.5);
+}
+.info-card-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+.info-card-title { font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.5rem; }
+.info-card-text { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.65; }
+
+/* ============================================================
+   7. RESPONSIVE
+============================================================ */
+@media (max-width: 1023px) {
+  .calc-layout { grid-template-columns: 1fr; }
+  .info-cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) {
+  .calc-hero { padding: 2.5rem 0 2rem; }
+  .calc-panel { padding: 1.5rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full-width { grid-column: 1; }
+  .stat-value { font-size: 1.25rem; }
+  .calorie-target-number { font-size: 2.5rem; }
+  .info-cards-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 479px) {
+  .stats-row { grid-template-columns: 1fr; }
+  .calorie-adjustments { grid-template-columns: 1fr; }
+  .bmi-card, .calorie-target-card, .macros-card { padding: 1.25rem; }
+}

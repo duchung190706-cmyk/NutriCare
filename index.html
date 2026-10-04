@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriCare – Trợ lý dinh dưỡng cá nhân của bạn." />
+  <title>NutriCare – Trợ lý dinh dưỡng cá nhân</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="NutriCare Home">
+        <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+        <span class="nav-logo-text">NutriCare</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="index.html"              class="nav-link active" data-i18n="nav.home"></a>
+        <a href="pages/dashboard.html"    class="nav-link"        data-i18n="nav.dashboard"></a>
+        <a href="pages/calculator.html"   class="nav-link"        data-i18n="nav.calculator"></a>
+        <a href="pages/foods.html"        class="nav-link"        data-i18n="nav.foods"></a>
+        <a href="pages/meals.html"        class="nav-link"        data-i18n="nav.meals"></a>
+        <a href="pages/guide.html"        class="nav-link"        data-i18n="nav.guide"></a>
+        <a href="pages/exercises.html"    class="nav-link"        data-i18n="nav.exercises"></a>
+        <a href="pages/grocery.html"     class="nav-link"        data-i18n="nav.grocery"></a>
+        <a href="pages/order.html"       class="nav-link"        data-i18n="nav.order"></a>
+        <a href="pages/meals.html"        class="nav-link nav-link-cta" data-i18n="nav.myMeals"></a>
+
+        <!-- ── Language Switcher ── -->
+        <div class="lang-switcher" role="group" aria-label="Chọn ngôn ngữ" id="langSwitcher">
+          <button class="lang-btn lang-btn-vi active" id="btnVI"
+                  data-lang="vi" aria-pressed="true"
+                  title="Tiếng Việt">
+            🇻🇳 VI
+          </button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn lang-btn-en" id="btnEN"
+                  data-lang="en" aria-pressed="false"
+                  title="English">
+            🇬🇧 EN
+          </button>
+        </div>
+      </nav>
+
+      <!-- Hamburger Button (Mobile) -->
+      <button class="hamburger" id="hamburger"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <section class="hero" id="hero">
+      <div class="container hero-container">
+
+        <!-- Hero Text -->
+        <div class="hero-content">
+          <span class="hero-badge" data-i18n="hero.badge"></span>
+          <h1 class="hero-title" data-i18n="hero.title"></h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
+          <div class="hero-actions">
+            <a href="pages/calculator.html" class="btn btn-primary">
+              <span data-i18n="hero.btnCalculate"></span>
+              <span class="btn-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="pages/meals.html" class="btn btn-secondary" data-i18n="hero.btnMeals"></a>
+          </div>
+          <div class="hero-trust">
+            <span class="hero-trust-item" data-i18n="hero.trustFree"></span>
+            <span class="hero-trust-item" data-i18n="hero.trustNoAcct"></span>
+            <span class="hero-trust-item" data-i18n="hero.trustScience"></span>
+          </div>
+        </div>
+
+        <!-- Hero Visual Card -->
+        <div class="hero-visual" aria-label="Nutrition summary card preview">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <span class="hero-card-emoji" aria-hidden="true">🥗</span>
+              <div>
+                <p class="hero-card-label" data-i18n="card.label"></p>
+                <p class="hero-card-date"  data-i18n="card.date"></p>
+              </div>
+              <span class="hero-card-badge" data-i18n="card.badge"></span>
+            </div>
+
+            <div class="hero-card-calories">
+              <div class="calorie-ring" aria-hidden="true">
+                <svg viewBox="0 0 80 80" width="80" height="80">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#E8F5E9" stroke-width="8"/>
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="#2E7D32" stroke-width="8"
+                    stroke-dasharray="148 213" stroke-linecap="round"
+                    transform="rotate(-90 40 40)"/>
+                </svg>
+                <div class="calorie-ring-text">
+                  <span class="calorie-number">1,420</span>
+                  <span class="calorie-unit">kcal</span>
+                </div>
+              </div>
+              <div class="calorie-info">
+                <p class="calorie-title"     data-i18n="card.caloriesTitle"></p>
+                <p class="calorie-goal"      data-i18n="card.caloriesGoal"></p>
+                <p class="calorie-remaining" data-i18n="card.caloriesLeft"></p>
+              </div>
+            </div>
+
+            <div class="hero-card-macros">
+              <div class="macro-item">
+                <div class="macro-bar-wrap">
+                  <div class="macro-bar macro-protein" style="width: 72%" aria-label="Protein 72%"></div>
+                </div>
+                <div class="macro-labels">
+                  <span class="macro-name" data-i18n="card.protein"></span>
+                  <span class="macro-value">86g</span>
+                </div>
+              </div>
+              <div class="macro-item">
+                <div class="macro-bar-wrap">
+                  <div class="macro-bar macro-carbs" style="width: 58%" aria-label="Carbs 58%"></div>
+                </div>
+                <div class="macro-labels">
+                  <span class="macro-name" data-i18n="card.carbs"></span>
+                  <span class="macro-value">130g</span>
+                </div>
+              </div>
+              <div class="macro-item">
+                <div class="macro-bar-wrap">
+                  <div class="macro-bar macro-fat" style="width: 45%" aria-label="Fat 45%"></div>
+                </div>
+                <div class="macro-labels">
+                  <span class="macro-name" data-i18n="card.fat"></span>
+                  <span class="macro-value">42g</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-card-water">
+              <span class="water-icon" aria-hidden="true">💧</span>
+              <span class="water-label" data-i18n="card.water"></span>
+              <div class="water-dots" aria-label="6 of 8 glasses drunk">
+                <span class="water-dot filled" aria-hidden="true"></span>
+                <span class="water-dot filled" aria-hidden="true"></span>
+                <span class="water-dot filled" aria-hidden="true"></span>
+                <span class="water-dot filled" aria-hidden="true"></span>
+                <span class="water-dot filled" aria-hidden="true"></span>
+                <span class="water-dot filled" aria-hidden="true"></span>
+                <span class="water-dot" aria-hidden="true"></span>
+                <span class="water-dot" aria-hidden="true"></span>
+              </div>
+              <span class="water-count">6 / 8</span>
+            </div>
+          </div>
+
+          <!-- Floating badges -->
+          <div class="float-badge float-badge-top" aria-hidden="true" data-i18n="card.burned"></div>
+          <div class="float-badge float-badge-bottom" aria-hidden="true" data-i18n="card.progress"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         QUICK STATS / BENEFITS SECTION
+    ============================================================ -->
+    <section class="benefits" id="benefits">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title"    data-i18n="benefits.sectionTitle"></h2>
+          <p  class="section-subtitle" data-i18n="benefits.sectionSubtitle"></p>
+        </div>
+
+        <div class="benefits-grid">
+
+          <div class="benefit-card">
+            <div class="benefit-icon benefit-icon-green" aria-hidden="true">⚖️</div>
+            <h3 class="benefit-title" data-i18n="benefits.bmiTitle"></h3>
+            <p  class="benefit-desc"  data-i18n="benefits.bmiDesc"></p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon benefit-icon-blue" aria-hidden="true">🔥</div>
+            <h3 class="benefit-title" data-i18n="benefits.caloriesTitle"></h3>
+            <p  class="benefit-desc"  data-i18n="benefits.caloriesDesc"></p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon benefit-icon-orange" aria-hidden="true">🍱</div>
+            <h3 class="benefit-title" data-i18n="benefits.mealTitle"></h3>
+            <p  class="benefit-desc"  data-i18n="benefits.mealDesc"></p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon benefit-icon-teal" aria-hidden="true">💧</div>
+            <h3 class="benefit-title" data-i18n="benefits.waterTitle"></h3>
+            <p  class="benefit-desc"  data-i18n="benefits.waterDesc"></p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HOW NUTRICARE HELPS SECTION
+    ============================================================ -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title"    data-i18n="steps.sectionTitle"></h2>
+          <p  class="section-subtitle" data-i18n="steps.sectionSubtitle"></p>
+        </div>
+
+        <div class="steps-container">
+
+          <div class="step-item">
+            <div class="step-number" aria-hidden="true">01</div>
+            <div class="step-icon"   aria-hidden="true">👤</div>
+            <div class="step-content">
+              <h3 class="step-title" data-i18n="steps.step1Title"></h3>
+              <p  class="step-desc"  data-i18n="steps.step1Desc"></p>
+            </div>
+            <div class="step-connector" aria-hidden="true"></div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number" aria-hidden="true">02</div>
+            <div class="step-icon"   aria-hidden="true">📊</div>
+            <div class="step-content">
+              <h3 class="step-title" data-i18n="steps.step2Title"></h3>
+              <p  class="step-desc"  data-i18n="steps.step2Desc"></p>
+            </div>
+            <div class="step-connector" aria-hidden="true"></div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number" aria-hidden="true">03</div>
+            <div class="step-icon"   aria-hidden="true">🍽️</div>
+            <div class="step-content">
+              <h3 class="step-title" data-i18n="steps.step3Title"></h3>
+              <p  class="step-desc"  data-i18n="steps.step3Desc"></p>
+            </div>
+            <div class="step-connector" aria-hidden="true"></div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number" aria-hidden="true">04</div>
+            <div class="step-icon"   aria-hidden="true">🍳</div>
+            <div class="step-content">
+              <h3 class="step-title" data-i18n="steps.step4Title"></h3>
+              <p  class="step-desc"  data-i18n="steps.step4Desc"></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         COOK OR ORDER? FEATURE SECTION
+    ============================================================ -->
+    <section class="cook-or-order" id="cook-or-order">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title"    data-i18n="cookOrder.sectionTitle"></h2>
+          <p  class="section-subtitle" data-i18n="cookOrder.sectionSubtitle"></p>
+        </div>
+
+        <div class="cook-order-grid">
+
+          <div class="cook-card cook-card-cook">
+            <div class="cook-card-icon" aria-hidden="true">👨‍🍳</div>
+            <h3 class="cook-card-title" data-i18n="cookOrder.cookTitle"></h3>
+            <p  class="cook-card-desc"  data-i18n="cookOrder.cookDesc"></p>
+            <ul class="cook-card-features">
+              <li>
+                <span class="feature-check" aria-hidden="true">✅</span>
+                <span data-i18n="cookOrder.cookFeat1"></span>
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✅</span>
+                <span data-i18n="cookOrder.cookFeat2"></span>
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✅</span>
+                <span data-i18n="cookOrder.cookFeat3"></span>
+              </li>
+            </ul>
+            <a href="pages/meals.html" class="btn btn-cook" data-i18n="cookOrder.cookBtn"></a>
+          </div>
+
+          <div class="cook-card cook-card-order">
+            <div class="cook-card-icon" aria-hidden="true">🛵</div>
+            <h3 class="cook-card-title" data-i18n="cookOrder.orderTitle"></h3>
+            <p  class="cook-card-desc"  data-i18n="cookOrder.orderDesc"></p>
+            <ul class="cook-card-features">
+              <li>
+                <span class="feature-check" aria-hidden="true">📍</span>
+                <span data-i18n="cookOrder.orderFeat1"></span>
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">📏</span>
+                <span data-i18n="cookOrder.orderFeat2"></span>
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">⏰</span>
+                <span data-i18n="cookOrder.orderFeat3"></span>
+              </li>
+            </ul>
+            <a href="pages/meals.html" class="btn btn-order">
+              <span data-i18n="cookOrder.orderBtn"></span>
+              <span class="coming-soon-tag" data-i18n="cookOrder.comingSoon"></span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURED MEAL PREVIEW
+    ============================================================ -->
+    <section class="featured-meal" id="featured-meal">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title"    data-i18n="meal.sectionTitle"></h2>
+          <p  class="section-subtitle" data-i18n="meal.sectionSubtitle"></p>
+        </div>
+
+        <div class="meal-card-wrapper">
+          <article class="meal-card" aria-label="Featured meal">
+
+            <!-- Meal Visual -->
+            <div class="meal-visual" aria-hidden="true">
+              <div class="meal-emoji-scene">
+                <span class="meal-emoji-main">🍱</span>
+                <div class="meal-emoji-deco">
+                  <span>🥦</span>
+                  <span>🍗</span>
+                  <span>🌾</span>
+                </div>
+              </div>
+              <span class="meal-tag" data-i18n="meal.tag"></span>
+            </div>
+
+            <!-- Meal Info -->
+            <div class="meal-info">
+              <div class="meal-header">
+                <h3 class="meal-name" data-i18n="meal.name"></h3>
+                <span class="meal-time" data-i18n="meal.time"></span>
+              </div>
+
+              <p class="meal-description" data-i18n="meal.description"></p>
+
+              <div class="meal-macros">
+                <div class="meal-macro-item">
+                  <span class="meal-macro-icon" aria-hidden="true">🔥</span>
+                  <div>
+                    <span class="meal-macro-value">650</span>
+                    <span class="meal-macro-unit">kcal</span>
+                  </div>
+                  <span class="meal-macro-label" data-i18n="meal.labelCalories"></span>
+                </div>
+                <div class="meal-macro-item">
+                  <span class="meal-macro-icon" aria-hidden="true">💪</span>
+                  <div>
+                    <span class="meal-macro-value">45</span>
+                    <span class="meal-macro-unit">g</span>
+                  </div>
+                  <span class="meal-macro-label" data-i18n="meal.labelProtein"></span>
+                </div>
+                <div class="meal-macro-item">
+                  <span class="meal-macro-icon" aria-hidden="true">🌾</span>
+                  <div>
+                    <span class="meal-macro-value">72</span>
+                    <span class="meal-macro-unit">g</span>
+                  </div>
+                  <span class="meal-macro-label" data-i18n="meal.labelCarbs"></span>
+                </div>
+                <div class="meal-macro-item">
+                  <span class="meal-macro-icon" aria-hidden="true">🥑</span>
+                  <div>
+                    <span class="meal-macro-value">18</span>
+                    <span class="meal-macro-unit">g</span>
+                  </div>
+                  <span class="meal-macro-label" data-i18n="meal.labelFat"></span>
+                </div>
+              </div>
+
+              <a href="pages/meals.html" class="btn btn-primary meal-btn" data-i18n="meal.viewBtn"></a>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FINAL CTA SECTION
+    ============================================================ -->
+    <section class="cta-section" id="cta">
+      <div class="container">
+        <div class="cta-card">
+          <span class="cta-emoji" aria-hidden="true">🌱</span>
+          <h2 class="cta-title" data-i18n="cta.title"></h2>
+          <p  class="cta-desc"  data-i18n="cta.desc"></p>
+          <a href="pages/calculator.html" class="btn btn-primary btn-large" data-i18n="cta.btn"></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="container footer-container">
+
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="NutriCare Home">
+          <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+          <span class="nav-logo-text">NutriCare</span>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc"></p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-nav-title" data-i18n="footer.navTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="index.html"            class="footer-link" data-i18n="footer.linkHome"></a></li>
+          <li><a href="pages/calculator.html" class="footer-link" data-i18n="footer.linkCalculator"></a></li>
+          <li><a href="pages/foods.html"      class="footer-link" data-i18n="footer.linkFoods"></a></li>
+          <li><a href="pages/meals.html"      class="footer-link" data-i18n="footer.linkMeals"></a></li>
+          <li><a href="pages/guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-tools">
+        <h4 class="footer-nav-title" data-i18n="footer.toolsTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="pages/calculator.html" class="footer-link" data-i18n="footer.linkBmi"></a></li>
+          <li><a href="pages/calculator.html" class="footer-link" data-i18n="footer.linkCalorie"></a></li>
+          <li><a href="pages/meals.html"      class="footer-link" data-i18n="footer.linkPlanner"></a></li>
+          <li><a href="pages/guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy" data-i18n="footer.copy"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Translation data must load BEFORE main.js -->
+  <script src="data/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+

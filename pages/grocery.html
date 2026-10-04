@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriCare – Danh sach mua sam thuc pham." data-i18n="grocery.metaDesc" />
+  <title data-i18n="grocery.metaTitle">NutriCare – Danh sách Mua sắm</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet" href="../css/grocery.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo" aria-label="NutriCare Home">
+        <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+        <span class="nav-logo-text">NutriCare</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="../index.html"   class="nav-link"        data-i18n="nav.home"></a>
+        <a href="dashboard.html" class="nav-link"        data-i18n="nav.dashboard"></a>
+        <a href="calculator.html" class="nav-link"        data-i18n="nav.calculator"></a>
+        <a href="foods.html"     class="nav-link"        data-i18n="nav.foods"></a>
+        <a href="meals.html"     class="nav-link"        data-i18n="nav.meals"></a>
+        <a href="guide.html"     class="nav-link"        data-i18n="nav.guide"></a>
+        <a href="exercises.html" class="nav-link"        data-i18n="nav.exercises"></a>
+        <a href="grocery.html"     class="nav-link active"        data-i18n="nav.grocery"></a>
+        <a href="order.html"       class="nav-link"        data-i18n="nav.order"></a>
+        <a href="meals.html"     class="nav-link nav-link-cta" data-i18n="nav.myMeals"></a>
+
+        <div class="lang-switcher" role="group" aria-label="Language options" id="langSwitcher">
+          <button class="lang-btn lang-btn-vi active" id="btnVI" data-lang="vi" aria-pressed="true" title="Tieng Viet">🇻🇳 VI</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn lang-btn-en" id="btnEN" data-lang="en" aria-pressed="false" title="English">🇬🇧 EN</button>
+        </div>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="grocery-hero">
+      <div class="container">
+        <span class="grocery-hero-badge" data-i18n="grocery.heroBadge"></span>
+        <h1 class="grocery-hero-title" data-i18n="grocery.heroTitle"></h1>
+        <p class="grocery-hero-subtitle" data-i18n="grocery.heroSubtitle"></p>
+
+        <div class="grocery-action-bar">
+          <button class="btn-grocery-action btn-grocery-primary" id="btnImportPlan">
+            📅 <span data-i18n="grocery.btnImportPlan"></span>
+          </button>
+          <button class="btn-grocery-action btn-grocery-secondary" id="btnAddRecipeToggle">
+            📖 <span data-i18n="grocery.btnAddRecipe"></span>
+          </button>
+          <button class="btn-grocery-action btn-grocery-ghost" id="btnClearDone">
+            ✅ <span data-i18n="grocery.btnClearDone"></span>
+          </button>
+          <button class="btn-grocery-action btn-grocery-danger" id="btnClearAll">
+            🗑 <span data-i18n="grocery.btnClearAll"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MAIN LAYOUT
+    ============================================================ -->
+    <div class="container">
+      <div class="grocery-layout">
+
+        <!-- LEFT: GROCERY LIST -->
+        <div class="grocery-list-panel">
+
+          <!-- Summary Strip -->
+          <div class="grocery-summary">
+            <div class="summary-stat">
+              <span class="summary-stat-val" id="sumTotal">0</span>
+              <span class="summary-stat-lbl" data-i18n="grocery.summaryTotal"></span>
+            </div>
+            <div class="summary-stat">
+              <span class="summary-stat-val clr-done" id="sumDone">0</span>
+              <span class="summary-stat-lbl" data-i18n="grocery.summaryDone"></span>
+            </div>
+            <div class="summary-stat">
+              <span class="summary-stat-val clr-left" id="sumLeft">0</span>
+              <span class="summary-stat-lbl" data-i18n="grocery.summaryLeft"></span>
+            </div>
+            <div class="grocery-progress">
+              <div class="grocery-progress-fill" id="groceryProgressFill" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div id="groceryEmpty" class="grocery-empty">
+            <div class="grocery-empty-icon" aria-hidden="true">🛒</div>
+            <h2 class="grocery-empty-title" data-i18n="grocery.emptyTitle"></h2>
+            <p class="grocery-empty-text" data-i18n="grocery.emptyText"></p>
+          </div>
+
+          <!-- Item List (rendered by JS) -->
+          <div id="groceryListContainer"></div>
+
+        </div><!-- /.grocery-list-panel -->
+
+        <!-- RIGHT: SIDEBAR -->
+        <div class="grocery-sidebar">
+
+          <!-- ADD CUSTOM ITEM -->
+          <div class="grocery-sidebar-card">
+            <h3 class="sidebar-card-title">➕ <span data-i18n="grocery.btnAddCustom"></span></h3>
+            <div class="custom-item-form">
+              <input type="text" id="customItemName" data-i18n-ph="grocery.customPlaceholder" />
+              <div class="custom-row">
+                <input type="number" id="customItemQty" min="0.1" step="0.1" data-i18n-ph="grocery.customQty" />
+                <input type="text" id="customItemUnit" data-i18n-ph="grocery.customUnit" />
+              </div>
+              <button class="btn-save-custom" id="btnSaveCustom" data-i18n="grocery.btnSaveCustom"></button>
+            </div>
+          </div>
+
+          <!-- RECIPE PICKER (hidden by default, toggled) -->
+          <div class="grocery-sidebar-card" id="recipePicker" style="display: none;">
+            <h3 class="sidebar-card-title">📖 <span data-i18n="grocery.selectRecipeTitle"></span></h3>
+            <div class="recipe-pick-list" id="recipePickList">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+        </div><!-- /.grocery-sidebar -->
+
+      </div><!-- /.grocery-layout -->
+    </div>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo footer-logo" aria-label="NutriCare Home">
+          <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+          <span class="nav-logo-text">NutriCare</span>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc"></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-nav-title" data-i18n="footer.navTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="../index.html"   class="footer-link" data-i18n="footer.linkHome"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalculator"></a></li>
+          <li><a href="foods.html"      class="footer-link" data-i18n="footer.linkFoods"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkMeals"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-tools">
+        <h4 class="footer-nav-title" data-i18n="footer.toolsTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkBmi"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalorie"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkPlanner"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy" data-i18n="footer.copy"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../data/translations.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../data/foods.js"></script>
+  <script src="../data/recipes.js"></script>
+  <script src="../js/grocery.js"></script>
+</body>
+</html>
+
+

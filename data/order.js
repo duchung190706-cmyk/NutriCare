@@ -1,0 +1,238 @@
+/**
+ * NutriCare - data/order.js
+ * ============================================================
+ * Real Restaurant Data (Phase 1)
+ * ============================================================
+ */
+
+const orderProviders = [
+  { 
+    id: 'cityfood', 
+    name: 'CityFood Healthy', 
+    rating: 0, // No verified rating yet
+    address: '87 Láng Hạ, Ba Đình, Hà Nội',
+    district: 'Ba Đình'
+  },
+  { 
+    id: 'fitnngon', 
+    name: 'Fit \'n Ngon - Healthy Meal', 
+    rating: 0, 
+    address: '75 Nguyễn Khoái, Hai Bà Trưng, Hà Nội',
+    district: 'Hai Bà Trưng'
+  },
+  { 
+    id: 'delisa', 
+    name: 'Delisa Fresh Salad Bar', 
+    rating: 0, 
+    address: '8A Lý Đạo Thành, Hoàn Kiếm, Hà Nội',
+    district: 'Hoàn Kiếm'
+  },
+  { 
+    id: 'pokehanoi', 
+    name: 'Poke Hanoi', 
+    rating: 0, 
+    address: '11B Hàng Khay, Hoàn Kiếm, Hà Nội',
+    district: 'Hoàn Kiếm'
+  },
+  { 
+    id: 'tossful', 
+    name: 'Tossful Salad Bar - Hanoi - Capital Place', 
+    rating: 0, 
+    address: 'Capital Place, 29 Liễu Giai, Ba Đình, Hà Nội',
+    district: 'Ba Đình'
+  }
+];
+
+const orderMeals = [
+  {
+    id: 'cf-l11',
+    providerId: 'cityfood',
+    nameVI: 'Mì soba cá saba áp chảo (L11)',
+    nameEN: 'Soba noodles with pan-seared saba fish',
+    descriptionVI: 'Mì soba Nhật, cá saba áp chảo, nấm mèo xào, cải bó xôi luộc',
+    descriptionEN: 'Japanese soba noodles, pan-seared saba fish, stir-fried wood ear mushrooms, boiled spinach',
+    nutritionVerified: true,
+    category: '',
+    calories: 332,
+    protein: 25,
+    carbs: 46,
+    fat: 6,
+    price: 84000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🍜',
+    tags: ['soba', 'fish', 'low-calorie']
+  },
+  {
+    id: 'cf-l10',
+    providerId: 'cityfood',
+    nameVI: 'Cá hồi áp chảo bí đỏ nướng (L10)',
+    nameEN: 'Pan-seared salmon & roasted pumpkin',
+    descriptionVI: 'Cá hồi áp chảo, bí đỏ nướng, măng tây xào, nấm mèo xào, hạnh nhân',
+    descriptionEN: 'Pan-seared salmon, roasted pumpkin, stir-fried asparagus, wood ear mushrooms, almonds',
+    nutritionVerified: true,
+    category: '',
+    calories: 305,
+    protein: 20,
+    carbs: 34,
+    fat: 10,
+    price: 109000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🐟',
+    tags: ['salmon', 'pumpkin', 'low-calorie']
+  },
+  {
+    id: 'cf-l9',
+    providerId: 'cityfood',
+    nameVI: 'Nui xoắn nạc vai bò (L9)',
+    nameEN: 'Fusilli with beef chuck',
+    descriptionVI: 'Nui xoắn, nạc vai bò, rau củ xào, đậu Hà Lan xào',
+    descriptionEN: 'Fusilli, beef chuck, stir-fried vegetables, stir-fried green peas',
+    nutritionVerified: true,
+    category: '',
+    calories: 340,
+    protein: 19,
+    carbs: 60,
+    fat: 2,
+    price: 56000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🍝',
+    tags: ['pasta', 'beef', 'low-calorie']
+  },
+  {
+    id: 'cf-l8',
+    providerId: 'cityfood',
+    nameVI: 'Cơm tôm sốt tiêu chanh (L8)',
+    nameEN: 'Rice with lemon pepper shrimp',
+    descriptionVI: 'Cơm gạo tẻ, tôm sốt tiêu chanh, súp lơ trắng luộc, đậu Hà Lan xào',
+    descriptionEN: 'White rice, lemon pepper shrimp, boiled cauliflower, stir-fried green peas',
+    nutritionVerified: true,
+    category: '',
+    calories: 352,
+    protein: 27,
+    carbs: 57,
+    fat: 2,
+    price: 104000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🍤',
+    tags: ['rice', 'shrimp', 'balanced']
+  },
+  {
+    id: 'cf-l7',
+    providerId: 'cityfood',
+    nameVI: 'Mỳ soba cá ngừ áp chảo (L7)',
+    nameEN: 'Matcha soba with pan-seared tuna',
+    descriptionVI: 'Mỳ soba trà xanh, cá ngừ áp chảo, nấm hương tươi xào, súp lơ trắng luộc, đậu phụ sốt mật ong',
+    descriptionEN: 'Matcha soba noodles, pan-seared tuna, fresh shiitake mushrooms, boiled cauliflower, honey glazed tofu',
+    nutritionVerified: true,
+    category: '',
+    calories: 342,
+    protein: 35,
+    carbs: 33,
+    fat: 8,
+    price: 85000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🐟',
+    tags: ['soba', 'tuna', 'high-protein']
+  },
+  {
+    id: 'cf-l5',
+    providerId: 'cityfood',
+    nameVI: 'Cơm tôm hấp sả (L5)',
+    nameEN: 'Rice with lemongrass steamed shrimp',
+    descriptionVI: 'Cơm gạo tẻ, tôm hấp sả, củ dền luộc, cải bó xôi luộc',
+    descriptionEN: 'White rice, lemongrass steamed shrimp, boiled beetroot, boiled spinach',
+    nutritionVerified: true,
+    category: '',
+    calories: 287,
+    protein: 16,
+    carbs: 53,
+    fat: 1,
+    price: 53000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🍤',
+    tags: ['rice', 'shrimp', 'low-calorie']
+  },
+  {
+    id: 'cf-l4',
+    providerId: 'cityfood',
+    nameVI: 'Mỳ soba tôm hấp sả (L4)',
+    nameEN: 'Matcha soba with lemongrass shrimp',
+    descriptionVI: 'Mỳ soba trà xanh, tôm hấp sả, súp lơ trắng luộc, hạt điều',
+    descriptionEN: 'Matcha soba noodles, lemongrass steamed shrimp, boiled cauliflower, cashews',
+    nutritionVerified: true,
+    category: '',
+    calories: 371,
+    protein: 22,
+    carbs: 48,
+    fat: 10,
+    price: 90000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🍜',
+    tags: ['soba', 'shrimp', 'balanced']
+  },
+  {
+    id: 'cf-l1',
+    providerId: 'cityfood',
+    nameVI: 'Cơm cá hồi áp chảo (L1)',
+    nameEN: 'Rice with pan-seared salmon',
+    descriptionVI: 'Cơm gạo tẻ, cá hồi áp chảo, đậu phụ sốt mật ong, súp lơ xanh luộc',
+    descriptionEN: 'White rice, pan-seared salmon, honey glazed tofu, boiled broccoli',
+    nutritionVerified: true,
+    category: '',
+    calories: 400,
+    protein: 30,
+    carbs: 52,
+    fat: 9,
+    price: 105000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🍱',
+    tags: ['rice', 'salmon', 'high-protein']
+  },
+  {
+    id: 'cf-b10',
+    providerId: 'cityfood',
+    nameVI: 'Cá ngừ áp chảo & tôm hấp (B10)',
+    nameEN: 'Pan-seared tuna & steamed shrimp',
+    descriptionVI: 'Bí đỏ nướng, cá ngừ áp chảo, tôm hấp sả, đậu gà rang, cần tây xào',
+    descriptionEN: 'Roasted pumpkin, pan-seared tuna, lemongrass steamed shrimp, roasted chickpeas, stir-fried celery',
+    nutritionVerified: true,
+    category: '',
+    calories: 480,
+    protein: 41,
+    carbs: 65,
+    fat: 6,
+    price: 114000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🥗',
+    tags: ['tuna', 'shrimp', 'high-protein']
+  },
+  {
+    id: 'cf-b9',
+    providerId: 'cityfood',
+    nameVI: 'Mỳ soba thịt bê & ức gà (B9)',
+    nameEN: 'Soba noodles with veal & chicken',
+    descriptionVI: 'Mỳ soba Nhật, bí đỏ nướng, thịt bê xào sả ớt, ức gà áp chảo, súp lơ xanh luộc, cà chua bi, hạt điều',
+    descriptionEN: 'Japanese soba noodles, roasted pumpkin, lemongrass chili veal, pan-seared chicken breast, boiled broccoli, cherry tomatoes, cashews',
+    nutritionVerified: true,
+    category: '',
+    calories: 429,
+    protein: 33,
+    carbs: 53,
+    fat: 10,
+    price: 118000,
+    rating: 0,
+    deliveryTime: '20-30',
+    image: '🍝',
+    tags: ['soba', 'beef', 'chicken', 'high-protein']
+  }
+];
+

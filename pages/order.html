@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriCare – Dat mon lanh manh." data-i18n="order.metaDesc" />
+  <title data-i18n="order.metaTitle">NutriCare – Đặt món lành mạnh</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet" href="../css/order.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo" aria-label="NutriCare Home">
+        <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+        <span class="nav-logo-text">NutriCare</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="../index.html"   class="nav-link"        data-i18n="nav.home"></a>
+        <a href="dashboard.html" class="nav-link"        data-i18n="nav.dashboard"></a>
+        <a href="calculator.html" class="nav-link"        data-i18n="nav.calculator"></a>
+        <a href="foods.html"     class="nav-link"        data-i18n="nav.foods"></a>
+        <a href="meals.html"     class="nav-link"        data-i18n="nav.meals"></a>
+        <a href="guide.html"     class="nav-link"        data-i18n="nav.guide"></a>
+        <a href="exercises.html" class="nav-link"        data-i18n="nav.exercises"></a>
+        <a href="grocery.html"   class="nav-link"        data-i18n="nav.grocery"></a>
+        <a href="order.html"     class="nav-link active" data-i18n="nav.order"></a>
+        <a href="meals.html"     class="nav-link nav-link-cta" data-i18n="nav.myMeals"></a>
+
+        <div class="lang-switcher" role="group" aria-label="Language options" id="langSwitcher">
+          <button class="lang-btn lang-btn-vi active" id="btnVI" data-lang="vi" aria-pressed="true" title="Tieng Viet">🇻🇳 VI</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn lang-btn-en" id="btnEN" data-lang="en" aria-pressed="false" title="English">🇬🇧 EN</button>
+        </div>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="order-hero">
+      <div class="container">
+        <span class="order-hero-badge" data-i18n="order.heroBadge"></span>
+        <h1 class="order-hero-title" data-i18n="order.heroTitle"></h1>
+        <p class="order-hero-subtitle" data-i18n="order.heroSubtitle"></p>
+        <div class="demo-disclaimer" data-i18n="order.demoDisclaimer"></div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- ============================================================
+           GOAL SUGGESTION STRIP
+      ============================================================ -->
+      <div class="order-goal-strip" id="orderGoalStrip" style="display: none;">
+        <div class="order-goal-info">
+          <h3 data-i18n="order.goalTitle"></h3>
+          <p id="orderGoalDesc"></p>
+        </div>
+        <div class="order-goal-stats" id="orderGoalStats"></div>
+      </div>
+
+      <!-- ============================================================
+           MAIN LAYOUT
+      ============================================================ -->
+      <div class="order-layout">
+
+        <!-- LEFT: MEAL GRID & FILTERS -->
+        <div class="order-main">
+
+          <!-- TOOLBAR -->
+          <div class="order-toolbar">
+            <input type="text" id="orderSearch" class="order-search" data-i18n-ph="order.searchPh" />
+
+            <div class="order-filters-row">
+              <!-- Category -->
+              <select id="filterCat" class="order-select">
+                <option value="all" data-i18n="order.filterAll"></option>
+                <option value="balanced" data-i18n="order.catBalanced"></option>
+                <option value="high-protein" data-i18n="order.catHighProtein"></option>
+                <option value="low-calorie" data-i18n="order.catLowCal"></option>
+                <option value="salad" data-i18n="order.catSalad"></option>
+                <option value="drink" data-i18n="order.catDrink"></option>
+              </select>
+
+              <!-- Calories -->
+              <select id="filterCal" class="order-select">
+                <option value="all" data-i18n="order.filterCalAll"></option>
+                <option value="low" data-i18n="order.filterCalLow"></option>
+                <option value="mid" data-i18n="order.filterCalMid"></option>
+                <option value="high" data-i18n="order.filterCalHigh"></option>
+              </select>
+
+              <!-- Sort -->
+              <select id="sortList" class="order-select">
+                <option value="default" data-i18n="order.sortDefault"></option>
+                <option value="price-asc" data-i18n="order.sortPriceLow"></option>
+                <option value="price-desc" data-i18n="order.sortPriceHigh"></option>
+                <option value="cal-asc" data-i18n="order.sortCalLow"></option>
+                <option value="cal-desc" data-i18n="order.sortCalHigh"></option>
+              </select>
+
+              <!-- Toggles -->
+              <label class="order-toggle-label">
+                <input type="checkbox" id="toggleHighPro" class="order-toggle-input" />
+                <span data-i18n="order.filterHighPro"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- GRID -->
+          <div class="order-grid" id="orderGrid"></div>
+
+        </div><!-- /.order-main -->
+
+        <!-- RIGHT: CART PANEL -->
+        <div class="order-cart" id="orderCart">
+          <div class="cart-header">
+            <span class="cart-title" data-i18n="order.cartTitle"></span>
+            <button class="btn-cart-close" id="btnCartClose" aria-label="Close cart">&times;</button>
+            <span class="cart-count" id="cartCountHeader">0</span>
+          </div>
+
+          <div class="cart-body" id="cartBody">
+            <div class="cart-empty" id="cartEmpty" data-i18n="order.cartEmpty"></div>
+            <div id="cartItemsList"></div>
+          </div>
+
+          <div class="cart-footer">
+            <div class="cart-summary-row">
+              <span data-i18n="order.labelSubtotal"></span>
+              <span id="cartSubtotal">0 ₫</span>
+            </div>
+            <div class="cart-summary-row">
+              <span data-i18n="order.labelDeliveryFee"></span>
+              <span id="cartDelivery">0 ₫</span>
+            </div>
+            <div class="cart-summary-total">
+              <span data-i18n="order.labelTotal"></span>
+              <span id="cartTotal">0 ₫</span>
+            </div>
+            <button class="btn-checkout" id="btnCheckout" disabled data-i18n="order.btnCheckout"></button>
+          </div>
+        </div>
+
+      </div><!-- /.order-layout -->
+    </div>
+  </main>
+
+  <!-- Mobile Cart FAB -->
+  <div class="mobile-cart-fab" id="mobileCartFab" aria-label="Open cart">
+    🛒 <div class="badge" id="cartFabBadge">0</div>
+  </div>
+
+  <!-- ============================================================
+       MODALS
+  ============================================================ -->
+
+  <!-- 1. Detail Modal -->
+  <div class="order-modal-overlay" id="detailModalOverlay">
+    <div class="order-modal" id="detailModal">
+      <div class="order-modal-img" id="detailImg"></div>
+      <div class="order-modal-body">
+        <div class="order-modal-header">
+          <div class="order-modal-prov" id="detailProv"></div>
+          <h2 class="order-modal-title" id="detailTitle"></h2>
+          <div class="meal-card-meta" style="margin-top:0.5rem; margin-bottom:0;">
+            <span id="detailRating"></span>
+            <span id="detailDelivery"></span>
+          </div>
+        </div>
+        <p class="order-modal-desc" id="detailDesc"></p>
+
+        <div class="order-modal-nutr">
+          <div class="meal-card-nutr-item">
+            <span class="meal-card-nutr-val" id="detailCal"></span>
+            <span class="meal-card-nutr-lbl" data-i18n="order.labelCal"></span>
+          </div>
+          <div class="meal-card-nutr-item">
+            <span class="meal-card-nutr-val" id="detailPro"></span>
+            <span class="meal-card-nutr-lbl" data-i18n="order.labelProtein"></span>
+          </div>
+          <div class="meal-card-nutr-item">
+            <span class="meal-card-nutr-val" id="detailCarb"></span>
+            <span class="meal-card-nutr-lbl" data-i18n="order.labelCarbs"></span>
+          </div>
+          <div class="meal-card-nutr-item">
+            <span class="meal-card-nutr-val" id="detailFat"></span>
+            <span class="meal-card-nutr-lbl" data-i18n="order.labelFat"></span>
+          </div>
+        </div>
+
+        <div class="order-modal-meta" id="detailTags"></div>
+
+        <div class="order-modal-footer">
+          <button class="btn-modal-close" id="btnDetailClose" data-i18n="order.btnClose"></button>
+          <button class="btn-modal-add" id="btnDetailAdd">
+            <span data-i18n="order.btnAddOrder"></span>
+            <span id="detailPrice"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Checkout Success Demo Modal -->
+  <div class="order-modal-overlay" id="checkoutModalOverlay">
+    <div class="order-modal" id="checkoutModal">
+      <div class="checkout-modal-content">
+        <div class="checkout-icon">🛍️</div>
+        <h2 class="checkout-title" data-i18n="order.checkoutTitle"></h2>
+        <p class="checkout-desc" data-i18n="order.checkoutDisclaimer"></p>
+
+        <div style="text-align:left; margin-bottom:1.5rem; background:var(--color-bg); padding:1rem; border-radius:var(--radius-md);">
+          <strong data-i18n="order.checkoutSummary" style="display:block; margin-bottom:0.5rem;"></strong>
+          <div id="checkoutItemsList" style="margin-bottom:0.75rem; border-bottom:1px dashed var(--color-border); padding-bottom:0.75rem;"></div>
+          <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.125rem;">
+            <span data-i18n="order.labelTotal"></span>
+            <span id="checkoutTotalVal"></span>
+          </div>
+        </div>
+
+        <button class="btn-checkout" id="btnCheckoutClose" data-i18n="order.btnNewOrder"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo footer-logo" aria-label="NutriCare Home">
+          <span class="nav-logo-icon" aria-hidden="true">🥗</span>
+          <span class="nav-logo-text">NutriCare</span>
+        </a>
+        <p class="footer-desc" data-i18n="footer.desc"></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-nav-title" data-i18n="footer.navTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="../index.html"   class="footer-link" data-i18n="footer.linkHome"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalculator"></a></li>
+          <li><a href="foods.html"      class="footer-link" data-i18n="footer.linkFoods"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkMeals"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-tools">
+        <h4 class="footer-nav-title" data-i18n="footer.toolsTitle"></h4>
+        <ul class="footer-nav-list">
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkBmi"></a></li>
+          <li><a href="calculator.html" class="footer-link" data-i18n="footer.linkCalorie"></a></li>
+          <li><a href="meals.html"      class="footer-link" data-i18n="footer.linkPlanner"></a></li>
+          <li><a href="guide.html"      class="footer-link" data-i18n="footer.linkGuide"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy" data-i18n="footer.copy"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../data/translations.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../data/order.js"></script>
+  <script src="../js/order.js"></script>
+</body>
+</html>

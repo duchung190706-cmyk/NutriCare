@@ -1,0 +1,954 @@
+/*
+ * NutriCare - Dashboard Styles
+ * ============================================================
+ */
+
+/* ============================================================
+   1. DASHBOARD HERO
+============================================================ */
+.dashboard-hero {
+  background-color: var(--surface-light);
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.dashboard-hero-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-hero-subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-date {
+  display: inline-block;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   2. DASHBOARD LAYOUT GRIDS
+============================================================ */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .summary-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================================
+   3. SUMMARY CARDS
+============================================================ */
+.summary-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.summary-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.summary-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0.25rem 0;
+}
+
+.summary-target {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.summary-progress-bg {
+  width: 100%;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.summary-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.fill-calories { background-color: #f59e0b; }
+.fill-protein { background-color: #ef4444; }
+.fill-water { background-color: #3b82f6; }
+.fill-exercise { background-color: #10b981; }
+
+/* Circular Progress Styles */
+.circular-card {
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.circular-progress-container {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+}
+.circular-chart {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.circle-bg {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 8;
+}
+.circle-path {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.8s ease-out;
+}
+.stroke-calories { stroke: #f59e0b; }
+.stroke-protein { stroke: #ef4444; }
+.stroke-water { stroke: #3b82f6; }
+
+.circular-content {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.circular-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.circular-percent {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 2px;
+}
+.summary-info {
+  display: flex;
+  flex-direction: column;
+}
+.summary-status {
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 500;
+}
+.summary-status.over-target {
+  color: #f59e0b;
+}
+
+/* Metric Card */
+.metric-card {
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.metric-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--surface-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.metric-icon-wrapper .summary-icon {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* Trend Panel */
+.trend-selector {
+  width: 120px !important;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+}
+
+
+/* ============================================================
+   4. DASHBOARD PANELS
+============================================================ */
+.dashboard-panel {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.panel-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* ============================================================
+   5. CALORIE PROGRESS (legacy – kept for compatibility)
+============================================================ */
+.calorie-overview {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.calorie-stat {
+  flex: 1;
+}
+
+.calorie-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.calorie-stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   5b. ENERGY BALANCE – DONUT CHART
+============================================================ */
+.energy-balance {
+  margin-bottom: 1.5rem;
+}
+
+/* -- Donut Container -- */
+.donut-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1.5rem;
+}
+
+.donut-chart {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.donut-bg {
+  fill: none;
+  stroke: #e8f5e9;
+  stroke-width: 14;
+}
+
+.donut-progress {
+  fill: none;
+  stroke: #2E7D32;
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-dasharray: 0 502.65;
+  transition: stroke-dasharray 1s cubic-bezier(0.4, 0, 0.2, 1),
+              stroke 0.4s ease;
+}
+
+/* Exceeded state */
+.donut-progress.exceeded {
+  stroke: #f59e0b;
+}
+
+/* No-data state */
+.donut-progress.no-data {
+  stroke: #cbd5e1;
+  stroke-dasharray: 0 502.65;
+}
+
+/* -- Donut Center Text -- */
+.donut-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  pointer-events: none;
+}
+
+.donut-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1F2937;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.donut-unit {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #667085;
+  margin-top: 2px;
+}
+
+.donut-percent {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2E7D32;
+  background: #e8f5e9;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-top: 6px;
+  white-space: nowrap;
+}
+
+.donut-percent.exceeded {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.donut-percent.no-data {
+  color: #64748b;
+  background: #f1f5f9;
+}
+
+/* -- Energy Detail Rows -- */
+.energy-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 1rem 0;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.energy-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.9rem;
+}
+
+.energy-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.consumed-dot {
+  background-color: #2E7D32;
+}
+
+.remaining-dot {
+  background-color: #e8f5e9;
+  border: 1.5px solid #a5d6a7;
+}
+
+.target-dot {
+  background-color: #64748b;
+}
+
+.energy-label {
+  flex: 1;
+  color: #475569;
+  font-weight: 500;
+}
+
+.energy-val {
+  font-weight: 700;
+  color: #1F2937;
+  text-align: right;
+  min-width: 80px;
+}
+
+/* -- Energy Secondary (BMR / TDEE) -- */
+.energy-secondary {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.energy-secondary-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.2rem;
+}
+
+.energy-secondary-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.energy-secondary-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+/* -- Donut entrance animation -- */
+@keyframes donut-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.donut-container {
+  animation: donut-appear 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* -- Responsive: Mobile -- */
+@media (max-width: 480px) {
+  .donut-container {
+    width: 170px;
+    height: 170px;
+  }
+
+  .donut-value {
+    font-size: 1.6rem;
+  }
+
+  .donut-unit {
+    font-size: 0.75rem;
+  }
+
+  .donut-percent {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+  }
+
+  .energy-secondary {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .energy-secondary-item {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+
+.macro-list {
+  margin-bottom: 1.5rem;
+}
+
+.macro-row {
+  margin-bottom: 1rem;
+}
+
+.macro-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.macro-name {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.macro-progress {
+  width: 100%;
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   6. WATER TRACKER
+============================================================ */
+.water-visual {
+  height: 300px;
+  background-color: #e0f2fe;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.water-fill {
+  background-color: #3b82f6;
+  width: 100%;
+  transition: height 0.8s ease;
+  opacity: 0.8;
+}
+
+.water-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #1e3a8a;
+  z-index: 10;
+}
+
+.water-text h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.water-text p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.water-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-water {
+  background-color: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-water:hover {
+  background-color: #e0f2fe;
+}
+
+/* ============================================================
+   7. WEIGHT TRACKER
+============================================================ */
+.weight-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--surface-light);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+}
+
+.weight-stat {
+  text-align: center;
+}
+
+.weight-stat span {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.weight-stat strong {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.weight-input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.weight-input-group input {
+  flex: 1;
+}
+
+.weight-chart-container {
+  height: 200px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  position: relative;
+  background-color: #f8fafc;
+}
+
+.weight-history-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+.weight-history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.weight-history-item:last-child {
+  border-bottom: none;
+}
+
+.weight-del-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.weight-del-btn:hover {
+  color: #ef4444;
+}
+
+/* ============================================================
+   8. QUICK ACTIONS
+============================================================ */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.action-card {
+  background: var(--surface-light);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.action-card:hover {
+  background: #fff;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.action-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ============================================================
+   9. GOAL RECOMMENDATION SECTION
+============================================================ */
+
+/* -- Empty States -- */
+.goal-empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.goal-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.goal-empty-text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.goal-empty-btn {
+  min-width: 140px;
+}
+
+.goal-set-row {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.goal-set-row input {
+  flex: 1;
+}
+
+/* -- Goal Summary -- */
+.goal-summary {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.goal-summary-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.goal-from,
+.goal-to {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  background: var(--surface-light);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  min-width: 80px;
+}
+
+.goal-arrow {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.goal-summary-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+.goal-summary-text.goal-type-lose {
+  color: #c2410c;
+  background: #fff7ed;
+}
+
+.goal-summary-text.goal-type-gain {
+  color: #1d4ed8;
+  background: #eff6ff;
+}
+
+.goal-summary-text.goal-type-maintain {
+  color: #2E7D32;
+  background: #e8f5e9;
+}
+
+.goal-summary-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.goal-edit-row {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 280px;
+  margin: 0.75rem auto 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.goal-edit-row input {
+  flex: 1;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.form-control-sm {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+/* -- Recommendation Cards Grid -- */
+.rec-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.rec-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--surface-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rec-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.rec-card-emoji {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.rec-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rec-card-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin: 0 0 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rec-card-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.rec-card-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.rec-card-actions .btn {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.rec-view-all-btn {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.rec-meal-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.rec-meal-actions .rec-view-all-btn {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* -- Responsive: Mobile -- */
+@media (max-width: 480px) {
+  .goal-summary-visual {
+    gap: 0.5rem;
+  }
+
+  .goal-from,
+  .goal-to {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.75rem;
+    min-width: 60px;
+  }
+
+  .goal-summary-text {
+    font-size: 0.95rem;
+  }
+
+  .rec-card {
+    flex-wrap: wrap;
+  }
+
+  .rec-card-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .rec-meal-actions {
+    flex-direction: column;
+  }
+
+  .goal-edit-row {
+    max-width: 100%;
+  }
+
+  .goal-set-row {
+    max-width: 100%;
+  }
+}
